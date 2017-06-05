@@ -31,6 +31,7 @@ __request(options[, POST_data, config])__
 * `config` {Object}
   * `followRedirect` {Boolean} (defaults to `true`)
   * `maxRedirects` {number} (defaults to `10`)
+  * `binary` {Boolean} (defaults to `false`)
   * `validate_status_code` {Function} | {false}
     * This `config` option is part of the API from `denodeify_net_request`.
     * It creates a Proxy that traps calls to `http.request` and `https.request`.<br>
@@ -42,23 +43,39 @@ __request(options[, POST_data, config])__
       is what enables `request` to follow redirects.<br>
       As such, please be careful if you choose to override this function.
 * Returns: {Promise}
+  * value is resolved to an {Object}: `{url, redirects, response}`
+    * `url` is a {string} that represents the original request `options`
+    * `redirects` is an {Array} of {string}
+      * each value is a url in the chain of redirects
+      * the ordering is chronological;<br>
+        the first element was the first redirect (from `url`)
+    * `response` is the data payload
+      * if `config.binary`: this value is a {Buffer}
+      * otherwise: this value is a {string} (utf8 encoding)
 
 #### Example:
 
 ```javascript
-const {request} = require('@warren-bank/node-request')
+const {request, denodeify} = require('@warren-bank/node-request')
+
+const fs = {
+  writeFile: denodeify( require('fs').writeFile )
+}
 
 const sep = Array(35).join('-')
 
 const log = function(msg, {div=' ', pre='', post=''}={}){
   if (Array.isArray(msg)) msg = msg.join(div)
-
   msg = pre + (msg ? msg : '') + post
-
   process.stdout.write(msg)
 }
 
-const process_success = function({url, redirects, response}){
+/**
+ * helper:
+ *  - format a message with information about a successful network request
+ *  - include the downloaded text data
+ **/
+const process_text_success = function({url, redirects, response}){
   log((
 `${sep}${sep}
 URL of initial request:
@@ -73,6 +90,36 @@ ${response}`
   ), {post:"\n"})
 }
 
+/**
+ * helper:
+ *  - format a message with information about a successful network request
+ *  - save the binary data to disk
+ **/
+const process_binary_success = function({url, redirects, response}, filename){
+  log((
+`${sep}${sep}
+URL of initial request:
+  ${url}
+
+Chain of URL redirects:
+  ${redirects.length ? redirects.join("\n  ") : '[]'}`
+  ), {post:"\n\n"})
+
+  fs.writeFile(filename, response, 'binary')
+  .then(() => {
+    log(['Binary data file saved to:', filename], {div:"\n  ", post:"\n\n"})
+  })
+  .catch((error) => {
+    log(['Error: Failed to save binary data file to:', filename], {div:"\n  ", post:"\n\n"})
+    log(['Error message:', error.message], {div:"\n  ", post:"\n\n"})
+  })
+
+}
+
+/**
+ * helper:
+ *  - format an error message
+ **/
 const process_error = function(error){
   log((
 `${sep}${sep}
@@ -95,12 +142,17 @@ Unfollowed redirect:
 
 // example: perform a request that succeeds after performing 2 redirects and changing protocol from 'http' to 'https'
 request('http://github.com/warren-bank/node-denodeify/raw/master/package.json')
-.then(process_success)
+.then(process_text_success)
 .catch(process_error)
 
 // example: perform the same request but configure the maximum number of permitted redirects to result in an Error
 request('http://github.com/warren-bank/node-denodeify/raw/master/package.json', '', {maxRedirects: 1})
-.then(process_success)
+.then(process_text_success)
+.catch(process_error)
+
+// example: perform a request that succeeds after performing 1 redirect and retrieves binary data in a Buffer
+request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', {binary: true})
+.then((data) => {process_binary_success(data, 'denodeify.zip')})
 .catch(process_error)
 ```
 

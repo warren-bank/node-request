@@ -17,13 +17,14 @@ const make_net_request = function(req_options, POST_data='', opts={}){
 
   const original_url = is_url ? req_options : `${req_options.protocol}//${req_options.host}:${req_options.port}${req_options.path}`
 
-  var cb_options
+  var cb_options = {}
   if ('validate_status_code' in opts){
-    cb_options = {validate_status_code: opts.validate_status_code}
+    cb_options['validate_status_code'] = opts.validate_status_code
     delete opts.validate_status_code
   }
-  else {
-    cb_options = {}
+  if ('binary' in opts){
+    cb_options['binary'] = opts.binary
+    delete opts.binary
   }
 
   const config = Object.assign(
