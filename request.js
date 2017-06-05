@@ -72,7 +72,10 @@ const make_net_request = function(req_options, POST_data='', opts={}){
       if (typeof _req_options === 'string'){
         _req_options = parse_url(_req_options)
       }
-      _req_options['method'] = (is_POST ? 'POST' : 'GET')
+
+      if (typeof _req_options['method'] !== 'string'){
+        _req_options['method'] = (is_POST ? 'POST' : 'GET')
+      }
 
       _protocol = _is_https ? https : http
 
