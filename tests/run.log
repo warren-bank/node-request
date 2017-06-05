@@ -1,0 +1,41 @@
+--------------------------------------------------------------------
+Error:
+  Exceeded maximum number of redirects
+
+HTTP status code:
+  302
+
+URL of initial request:
+  http://github.com/warren-bank/node-denodeify/raw/master/package.json
+
+Chain of URL redirects:
+  https://github.com/warren-bank/node-denodeify/raw/master/package.json
+
+Unfollowed redirect:
+  https://raw.githubusercontent.com/warren-bank/node-denodeify/master/package.json
+
+--------------------------------------------------------------------
+URL of initial request:
+  http://github.com/warren-bank/node-denodeify/raw/master/package.json
+
+Chain of URL redirects:
+  https://github.com/warren-bank/node-denodeify/raw/master/package.json
+  https://raw.githubusercontent.com/warren-bank/node-denodeify/master/package.json
+
+Data in response for last URL:
+----------------------------------
+{
+  "name": "@warren-bank/node-denodeify",
+  "version": "1.0.7",
+  "main": "denodeify.js",
+  "description": "wrap Function with Proxy, proxied call returns Promise",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/node-denodeify"
+  }
+}
+
