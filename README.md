@@ -19,19 +19,19 @@ npm install --save @warren-bank/node-request
 
 __request(options[, POST_data, config])__
 
-* `options` <Object> | <string>
+* `options` {Object} | {string}
   * for a complete list of all attributes,<br>
     please refer to the Node.js api documentation for:
     * [http.request](https://nodejs.org/api/http.html#http_http_request_options_callback)
     * [https.request](https://nodejs.org/api/https.html#https_https_request_options_callback)
-* `POST_data` <Object> | <string>
+* `POST_data` {Object} | {string}
   * key/value pairs that are written to the Request object
-  * <string> values take the form: `"a=1&b=2"`
-  * <Object> values take the form: `{a:1,b:2}`
-* `config` <Object>
-  * `followRedirect` <Boolean> (defaults to `true`)
-  * `maxRedirects` <number> (defaults to `10`)
-  * `validate_status_code` <Function> | <false>
+  * {string} value takes the form: `"a=1&b=2"`
+  * {Object} value takes the form: `{a:1,b:2}`
+* `config` {Object}
+  * `followRedirect` {Boolean} (defaults to `true`)
+  * `maxRedirects` {number} (defaults to `10`)
+  * `validate_status_code` {Function} | {false}
     * This `config` option is part of the API from `denodeify_net_request`.
     * It creates a Proxy that traps calls to `http.request` and `https.request`.<br>
       The Proxy accepts this value (to change its default behavior)<br>
@@ -41,7 +41,7 @@ __request(options[, POST_data, config])__
       In fact, the information produced by the default handler<br>
       is what enables `request` to follow redirects.<br>
       As such, please be careful if you choose to override this function.
-* Returns: <Promise>
+* Returns: {Promise}
 
 #### Example:
 
