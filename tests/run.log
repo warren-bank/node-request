@@ -16,17 +16,27 @@ Unfollowed redirect:
 
 --------------------------------------------------------------------
 URL of initial request:
+  https://github.com/warren-bank/node-denodeify/archive/master.zip
+
+Chain of URL redirects:
+  https://codeload.github.com/warren-bank/node-denodeify/zip/master
+
+Binary data Stream saved to file:
+  denodeify.Stream.zip
+
+--------------------------------------------------------------------
+URL of initial request:
   http://github.com/warren-bank/node-denodeify/raw/master/package.json
 
 Chain of URL redirects:
   https://github.com/warren-bank/node-denodeify/raw/master/package.json
   https://raw.githubusercontent.com/warren-bank/node-denodeify/master/package.json
 
-Data in response for last URL:
+Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
@@ -46,15 +56,15 @@ URL of initial request:
 Chain of URL redirects:
   https://codeload.github.com/warren-bank/node-denodeify/zip/master
 
-Binary data file saved to:
-  denodeify.zip
+Binary data Buffer saved to file:
+  denodeify.Buffer.zip
 
----------------------------------------
+--------------------------------------------------------------------
 Test integrity of binary zip file:
-  > unzip -t denodeify.zip
+  > unzip -t denodeify.Buffer.zip
 ---------------------------------------
-Archive:  denodeify.zip
-95b75df5a16756e75ff6f9ce1c5bbc4fac6d10a3
+Archive:  denodeify.Buffer.zip
+16c8b36da589af723f6e3effa7525ee67e51cdbc
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -70,6 +80,34 @@ Archive:  denodeify.zip
     testing: node-denodeify-master/tests/js/04.js   OK
     testing: node-denodeify-master/tests/js/05.js   OK
     testing: node-denodeify-master/tests/js/06.js   OK
+    testing: node-denodeify-master/tests/js/07.js   OK
     testing: node-denodeify-master/tests/run.log   OK
     testing: node-denodeify-master/tests/run.sh   OK
-No errors detected in compressed data of denodeify.zip.
+No errors detected in compressed data of denodeify.Buffer.zip.
+
+--------------------------------------------------------------------
+Test integrity of binary zip file:
+  > unzip -t denodeify.Stream.zip
+---------------------------------------
+Archive:  denodeify.Stream.zip
+16c8b36da589af723f6e3effa7525ee67e51cdbc
+    testing: node-denodeify-master/   OK
+    testing: node-denodeify-master/.gitignore   OK
+    testing: node-denodeify-master/.npmignore   OK
+    testing: node-denodeify-master/LICENSE.txt   OK
+    testing: node-denodeify-master/README.md   OK
+    testing: node-denodeify-master/denodeify.js   OK
+    testing: node-denodeify-master/package.json   OK
+    testing: node-denodeify-master/tests/   OK
+    testing: node-denodeify-master/tests/js/   OK
+    testing: node-denodeify-master/tests/js/01.js   OK
+    testing: node-denodeify-master/tests/js/02.js   OK
+    testing: node-denodeify-master/tests/js/03.js   OK
+    testing: node-denodeify-master/tests/js/04.js   OK
+    testing: node-denodeify-master/tests/js/05.js   OK
+    testing: node-denodeify-master/tests/js/06.js   OK
+    testing: node-denodeify-master/tests/js/07.js   OK
+    testing: node-denodeify-master/tests/run.log   OK
+    testing: node-denodeify-master/tests/run.sh   OK
+No errors detected in compressed data of denodeify.Stream.zip.
+

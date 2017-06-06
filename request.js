@@ -26,6 +26,10 @@ const make_net_request = function(req_options, POST_data='', opts={}){
     cb_options['binary'] = opts.binary
     delete opts.binary
   }
+  if ('stream' in opts){
+    cb_options['stream'] = opts.stream
+    delete opts.stream
+  }
 
   const config = Object.assign(
     {},
