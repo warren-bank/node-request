@@ -28,7 +28,7 @@ URL of initial request:
   ${url}
 
 Chain of URL redirects:
-  ${redirects.length ? redirects.join("\n  ") : '[]'}
+  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}
 
 Data response for URL of final request:
 ${sep}
@@ -48,7 +48,7 @@ URL of initial request:
   ${url}
 
 Chain of URL redirects:
-  ${redirects.length ? redirects.join("\n  ") : '[]'}`
+  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}`
   ), {post:"\n\n"})
 
   fs.writeFile(filename, response, 'binary')
@@ -73,7 +73,7 @@ URL of initial request:
   ${url}
 
 Chain of URL redirects:
-  ${redirects.length ? redirects.join("\n  ") : '[]'}`
+  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}`
   ), {post:"\n\n"})
 
   response
@@ -105,7 +105,7 @@ URL of initial request:
   ${error.url ? error.url : 'unavailable'}
 
 Chain of URL redirects:
-  ${error.redirects.length ? error.redirects.join("\n  ") : '[]'}
+  ${(error.redirects && error.redirects.length) ? error.redirects.join("\n  ") : '[]'}
 
 Unfollowed redirect:
   ${error.location ? error.location : 'none'}`

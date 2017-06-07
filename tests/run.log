@@ -21,8 +21,15 @@ URL of initial request:
 Chain of URL redirects:
   https://codeload.github.com/warren-bank/node-denodeify/zip/master
 
-Binary data Stream saved to file:
-  denodeify.Stream.zip
+--------------------------------------------------------------------
+URL of initial request:
+  https://github.com/warren-bank/node-denodeify/archive/master.zip
+
+Chain of URL redirects:
+  https://codeload.github.com/warren-bank/node-denodeify/zip/master
+
+Binary data Buffer saved to file:
+  denodeify.Buffer.zip
 
 --------------------------------------------------------------------
 URL of initial request:
@@ -36,7 +43,7 @@ Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
@@ -49,22 +56,15 @@ Data response for URL of final request:
   }
 }
 
---------------------------------------------------------------------
-URL of initial request:
-  https://github.com/warren-bank/node-denodeify/archive/master.zip
-
-Chain of URL redirects:
-  https://codeload.github.com/warren-bank/node-denodeify/zip/master
-
-Binary data Buffer saved to file:
-  denodeify.Buffer.zip
+Binary data Stream saved to file:
+  denodeify.Stream.zip
 
 --------------------------------------------------------------------
 Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-16c8b36da589af723f6e3effa7525ee67e51cdbc
+0ad282064d13541596481f6adbb781ecd899f9a2
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -90,7 +90,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-16c8b36da589af723f6e3effa7525ee67e51cdbc
+0ad282064d13541596481f6adbb781ecd899f9a2
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -110,4 +110,22 @@ Archive:  denodeify.Stream.zip
     testing: node-denodeify-master/tests/run.log   OK
     testing: node-denodeify-master/tests/run.sh   OK
 No errors detected in compressed data of denodeify.Stream.zip.
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/anything?my-method=GET&my-data=querystring","method":"GET","querystring":{"my-data":"querystring","my-method":"GET"},"headers":{}}
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/put","querystring":{},"data":"my-method=PUT&my-data=stream","headers":{"Content-Length":"28"}}
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/patch","querystring":{},"data":"my-method=PATCH&my-data=stream","headers":{"Content-Length":"30"}}
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/post","querystring":{},"data":"my-method=POST&my-data=stream","headers":{"Content-Length":"29"}}
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/get","querystring":{},"headers":{"Content-Length":"28"}}
+
+--------------------------------------------------------------------
+{"url":"https://httpbin.org/delete","querystring":{},"data":"my-method=DELETE&my-data=stream","headers":{"Content-Length":"31"}}
 
