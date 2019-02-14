@@ -1,5 +1,6 @@
 const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify')
 const parse_url = require('url').parse
+const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
 
 const http = {
   request: denodeify_net_request( require('http').request )
@@ -9,13 +10,17 @@ const https = {
   request: denodeify_net_request( require('https').request )
 }
 
+const get_url_from_request_options = function(req_options){
+  return `${req_options.protocol}//${req_options.host}:${req_options.port}${req_options.path}`
+}
+
 const make_net_request = function(req_options, POST_data='', opts={}){
   const regex = /^https/i
 
   const is_url = (typeof req_options === 'string')
   const is_POST = (!! POST_data)
 
-  const original_url = is_url ? req_options : `${req_options.protocol}//${req_options.host}:${req_options.port}${req_options.path}`
+  const original_url = is_url ? req_options : get_url_from_request_options(req_options)
 
   var cb_options = {}
   if ('validate_status_code' in opts){
@@ -36,16 +41,19 @@ const make_net_request = function(req_options, POST_data='', opts={}){
     {
       // default user-configurable options
       followRedirect: true,
-      maxRedirects: 10
+      maxRedirects: 10,
+      cookieJar: null
     },
     opts
   )
+
+  config.cookieJar = getCookieJar(config.cookieJar)
 
   return new Promise((resolve, reject) => {
     var redirects = []
     var _is_https, _req_options, _protocol, _error
 
-    const send_net_request = function(url){
+    const send_net_request = async function(url){
 
       if (url === undefined){
         // initial request
@@ -55,7 +63,7 @@ const make_net_request = function(req_options, POST_data='', opts={}){
         }
         else {
           _is_https = regex.test(req_options.protocol)
-          _req_options = req_options
+          _req_options = {...req_options}
         }
       }
       else {
@@ -82,10 +90,28 @@ const make_net_request = function(req_options, POST_data='', opts={}){
         _req_options['method'] = (is_POST ? 'POST' : 'GET')
       }
 
+      if (config.cookieJar){
+        _req_options['headers'] = _req_options['headers'] || {}
+
+        await getCookieRequestHeader(
+          config.cookieJar,
+          get_url_from_request_options(_req_options),
+          _req_options['headers']
+        )
+      }
+
       _protocol = _is_https ? https : http
 
       _protocol.request(_req_options, POST_data, cb_options)
-      .then((data) => {
+      .then(async (data) => {
+        if (config.cookieJar){
+          await setCookieResponseHeader(
+            config.cookieJar,
+            get_url_from_request_options(_req_options),
+            data.headers
+          )
+        }
+
         resolve({url: original_url, redirects, response: data})
       })
       .catch((error) => {

@@ -30,10 +30,14 @@ URL of initial request:
 Chain of URL redirects:
   ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}
 
+HTTP response headers of final request:
+${sep}
+${JSON.stringify(response.headers, null, 2)}
+
 Data response for URL of final request:
 ${sep}
-${response}`
-  ), {post:"\n"})
+${response.trim()}`
+  ), {post:"\n\n"})
 }
 
 /**
@@ -48,7 +52,11 @@ URL of initial request:
   ${url}
 
 Chain of URL redirects:
-  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}`
+  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}
+
+HTTP response headers of final request:
+${sep}
+${JSON.stringify(response.headers, null, 2)}`
   ), {post:"\n\n"})
 
   fs.writeFile(filename, response, 'binary')
@@ -73,7 +81,11 @@ URL of initial request:
   ${url}
 
 Chain of URL redirects:
-  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}`
+  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}
+
+HTTP response headers of final request:
+${sep}
+${JSON.stringify(response.headers, null, 2)}`
   ), {post:"\n\n"})
 
   response
@@ -112,22 +124,26 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-// example: perform a request that succeeds after performing 2 redirects and changing protocol from 'http' to 'https'
-request('http://github.com/warren-bank/node-denodeify/raw/master/package.json')
-.then(process_text_success)
-.catch(process_error)
+const run_test = async function(){
+  // example: perform a request that succeeds after performing 2 redirects and changing protocol from 'http' to 'https'
+  await request('http://github.com/warren-bank/node-denodeify/raw/master/package.json')
+  .then(process_text_success)
+  .catch(process_error)
 
-// example: perform the same request but configure the maximum number of permitted redirects to result in an Error
-request('http://github.com/warren-bank/node-denodeify/raw/master/package.json', '', {maxRedirects: 1})
-.then(process_text_success)
-.catch(process_error)
+  // example: perform the same request but configure the maximum number of permitted redirects to result in an Error
+  await request('http://github.com/warren-bank/node-denodeify/raw/master/package.json', '', {maxRedirects: 1})
+  .then(process_text_success)
+  .catch(process_error)
 
-// example: perform a request that succeeds after performing 1 redirect and retrieves binary data in a Buffer
-request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', {binary: true})
-.then((data) => {process_binary_success(data, 'denodeify.Buffer.zip')})
-.catch(process_error)
+  // example: perform a request that succeeds after performing 1 redirect and retrieves binary data in a Buffer
+  await request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', {binary: true})
+  .then((data) => {process_binary_success(data, 'denodeify.Buffer.zip')})
+  .catch(process_error)
 
-// example: perform the same request but retrieve the binary data from a Readable stream
-request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', {binary: true, stream: true})
-.then((data) => {process_binary_stream_success(data, 'denodeify.Stream.zip')})
-.catch(process_error)
+  // example: perform the same request but retrieve the binary data from a Readable stream
+  await request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', {binary: true, stream: true})
+  .then((data) => {process_binary_stream_success(data, 'denodeify.Stream.zip')})
+  .catch(process_error)
+}
+
+run_test()

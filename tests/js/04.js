@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const {request, denodeify} = require('../../request')
-const parse_url = require('url').parse
+const {request} = require('../../request')
+const {convert_JSON_to_NS, convert_NS_to_JSON} = require('../../lib/cookie_jar_converter')
 
 const sep = Array(35).join('-')
 
@@ -16,19 +16,22 @@ const log = function(msg, {div=' ', pre='', post=''}={}){
  *  - format a message with information about a successful network request
  *  - include the downloaded text data
  **/
-const process_text_request_metadata_success = function({url, redirects, response}){
-  var all_data, select_data
-  all_data = JSON.parse(response)
-  select_data = {
-    "url": all_data.url,
-    "method": all_data.method,
-    "querystring": all_data.args,
-    "data": all_data.data,
-    "headers": {
-      "Content-Length": all_data.headers['Content-Length']
-    }
-  }
-  log([`${sep}${sep}`, JSON.stringify(select_data)], {div:"\n", post:"\n\n"})
+const process_text_success = function(what, {url, redirects, response}){
+  const headers = what.headers ?
+`\n\nHTTP response headers of request:
+${sep}
+${JSON.stringify(response.headers, null, 2)}` : ''
+
+  const body = what.body ?
+`\n\nData response for URL of request:
+${sep}
+${response.trim()}` : ''
+
+  log((
+`${sep}${sep}
+URL of request:
+  ${url}${headers}${body}`
+  ), {post:"\n\n"})
 }
 
 /**
@@ -55,34 +58,25 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-const req_options = parse_url('https://httpbin.org/anything')
+const convert_cookie_file_formats = function(input_JSON){
+  const output_NS   = input_JSON.replace('.json', '.out.txt')
+  const output_JSON = input_JSON.replace('.json', '.out.json')
 
-// example: perform a GET and write data to the querystring
-request(Object.assign({}, req_options, {method: 'GET', path: `${req_options.path}?my-method=GET&my-data=querystring`}))
-.then(process_text_request_metadata_success)
-.catch(process_error)
+  convert_JSON_to_NS(input_JSON, output_NS)
+  convert_NS_to_JSON(output_NS,  output_JSON)
+}
 
-// example: perform a GET and write data to the outbound Request stream
-request(Object.assign({}, req_options, {method: 'GET', path: '/get'}), 'my-method=GET&my-data=stream')
-.then(process_text_request_metadata_success)
-.catch(process_error)
+const run_test = async function(){
+  // example: perform a request that adds a cookie "foo=bar"
+  await request('https://httpbin.org/cookies/set/foo/bar', '', {followRedirect: false, validate_status_code: false, cookieJar: './cookies.json'})
+  .then(process_text_success.bind(this, {headers: true}))
+  .then(convert_cookie_file_formats.bind(this, './cookies.json'))
+  .catch(process_error)
 
-// example: perform a POST and write data to the outbound Request stream
-request(Object.assign({}, req_options, {method: 'POST', path: '/post'}), 'my-method=POST&my-data=stream')
-.then(process_text_request_metadata_success)
-.catch(process_error)
+  // example: perform a request that retrieves cookies
+  await request('https://httpbin.org/cookies', '', {followRedirect: false, validate_status_code: false, cookieJar: './cookies.json'})
+  .then(process_text_success.bind(this, {body: true}))
+  .catch(process_error)
+}
 
-// example: perform a PUT and write data to the outbound Request stream
-request(Object.assign({}, req_options, {method: 'PUT', path: '/put'}), 'my-method=PUT&my-data=stream')
-.then(process_text_request_metadata_success)
-.catch(process_error)
-
-// example: perform a PATCH and write data to the outbound Request stream
-request(Object.assign({}, req_options, {method: 'PATCH', path: '/patch'}), 'my-method=PATCH&my-data=stream')
-.then(process_text_request_metadata_success)
-.catch(process_error)
-
-// example: perform a DELETE and write data to the outbound Request stream
-request(Object.assign({}, req_options, {method: 'DELETE', path: '/delete'}), 'my-method=DELETE&my-data=stream')
-.then(process_text_request_metadata_success)
-.catch(process_error)
+run_test()

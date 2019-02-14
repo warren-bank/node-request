@@ -52,6 +52,23 @@ __request(options[, POST_data, config])__
       In fact, the information produced by the default handler<br>
       is what enables `request` to follow redirects.<br>
       As such, please be careful if you choose to override this function.
+  * `cookieJar` {CookieJar} | {string} | {true}
+    * `CookieJar`:
+      * instance of [require('tough-cookie').CookieJar](https://github.com/salesforce/tough-cookie)
+        * choose your own cookie store
+    * `string`:
+      * file path to the persistent text file used to store cookie data
+      * file is created when it does not already exist
+      * constructs an instance of [require('tough-cookie').CookieJar](https://github.com/salesforce/tough-cookie) using the ["tough-cookie-filestore2"](https://github.com/stanleyxu2005/tough-cookie-filestore2) cookie store
+        * this cookie store uses JSON format
+    * `true`:
+      * constructs an instance of [require('tough-cookie/lib/memstore').MemoryCookieStore](https://github.com/salesforce/tough-cookie/blob/master/lib/memstore.js)
+        * this cookie store is initialized empty and the cookies it collects are not persisted
+        * this is only useful when:
+          * the request is redirected at least once
+          * cookies are added earlier in the chain of redirects than they are ultimately consumed
+    * default:
+      * no cookie jar is used
 * Returns: {Promise}
   * value is resolved to an {Object}: `{url, redirects, response}`
     * `url` is a {string} that represents the original request `options`
