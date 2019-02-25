@@ -1,6 +1,6 @@
 ### [request](https://github.com/warren-bank/node-request)
 
-An extremely lightweight HTTP request client.
+An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies. Returns: Promise.
 
 The module includes 1 function:
   * `request`
