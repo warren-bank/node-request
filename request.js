@@ -1,6 +1,7 @@
 const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify')
 const parse_url = require('url').parse
 const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
+const {normalizePath} = require('./lib/url_utils')
 
 const http = {
   request: denodeify_net_request( require('http').request )
@@ -40,6 +41,7 @@ const make_net_request = function(req_options, POST_data='', opts={}){
     {},
     {
       // default user-configurable options
+      normalizePath: true,
       followRedirect: true,
       maxRedirects: 10,
       cookieJar: null
@@ -88,6 +90,10 @@ const make_net_request = function(req_options, POST_data='', opts={}){
 
       if (typeof _req_options['method'] !== 'string'){
         _req_options['method'] = (is_POST ? 'POST' : 'GET')
+      }
+
+      if (config.normalizePath) {
+        normalizePath(_req_options)
       }
 
       if (config.cookieJar){

@@ -29,6 +29,7 @@ __request(options[, POST_data, config])__
   * {string} value takes the form: `"a=1&b=2"`
   * {Object} value takes the form: `{a:1,b:2}`
 * `config` {Object}
+  * `normalizePath` {Boolean} (defaults to `true`)
   * `followRedirect` {Boolean} (defaults to `true`)
   * `maxRedirects` {number} (defaults to `10`)
   * `binary` {Boolean} (defaults to `false`)
