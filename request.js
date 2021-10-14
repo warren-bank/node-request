@@ -1,6 +1,7 @@
 const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify')
 const parse_url = require('url').parse
 const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
+const {getRequestHeaderAcceptEncoding, processResponseContentEncoding} = require('./lib/zlib_utils')
 const {normalizePath} = require('./lib/url_utils')
 
 const http = {
@@ -20,21 +21,22 @@ const make_net_request = function(req_options, POST_data='', opts={}){
 
   const is_url = (typeof req_options === 'string')
   const is_POST = (!! POST_data)
+  let is_binary = false
 
   const original_url = is_url ? req_options : get_url_from_request_options(req_options)
 
-  var cb_options = {}
+  var cb_options = {binary: true}
   if ('validate_status_code' in opts){
     cb_options['validate_status_code'] = opts.validate_status_code
     delete opts.validate_status_code
   }
-  if ('binary' in opts){
-    cb_options['binary'] = opts.binary
-    delete opts.binary
-  }
   if ('stream' in opts){
     cb_options['stream'] = opts.stream
     delete opts.stream
+  }
+  if ('binary' in opts){
+    is_binary = opts.binary
+    delete opts.binary
   }
 
   const config = Object.assign(
@@ -92,6 +94,13 @@ const make_net_request = function(req_options, POST_data='', opts={}){
         _req_options['method'] = (is_POST ? 'POST' : 'GET')
       }
 
+      if (!(_req_options['headers'] instanceof Object)){
+        _req_options['headers'] = {}
+      }
+      if (typeof _req_options['headers']['accept-encoding'] !== 'string'){
+        _req_options['headers']['accept-encoding'] = getRequestHeaderAcceptEncoding()
+      }
+
       if (config.normalizePath) {
         normalizePath(_req_options)
       }
@@ -116,6 +125,20 @@ const make_net_request = function(req_options, POST_data='', opts={}){
             get_url_from_request_options(_req_options),
             data.headers
           )
+        }
+
+        data = await processResponseContentEncoding(data, cb_options)
+
+        if (!is_binary) {
+          if (cb_options.stream) {
+            data.setEncoding('utf8')
+          }
+          else {
+            const txt_data = new String(data.toString('utf8'))
+            txt_data.headers = data.headers
+
+            data = txt_data
+          }
         }
 
         resolve({url: original_url, redirects, response: data})

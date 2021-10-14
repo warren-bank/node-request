@@ -1,12 +1,12 @@
 {
   "name": "@warren-bank/node-request",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "request.js",
   "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies. Returns: Promise.",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "dependencies": {
-    "@warren-bank/node-denodeify": "^2.0.1",
+    "@warren-bank/node-denodeify": "^2.0.2",
     "tough-cookie": "^3.0.1",
     "tough-cookie-filestore2": "^1.0.0"
   },

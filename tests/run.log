@@ -11,37 +11,37 @@ Chain of URL redirects:
 HTTP response headers of final request:
 ----------------------------------
 {
+  "connection": "close",
+  "content-length": "239",
+  "cache-control": "max-age=300",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+  "content-type": "text/plain; charset=utf-8",
+  "etag": "W/\"99360077048aa5e0ead6ac00cc842b66e7e90f4801b9d9fb057fec8ea3ee8480\"",
   "strict-transport-security": "max-age=31536000",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "etag": "\"edc084d3ad68b2d55048bdd6d2a38ae93526898b\"",
-  "content-type": "text/plain; charset=utf-8",
-  "cache-control": "max-age=300",
-  "x-geo-block-list": "",
-  "x-github-request-id": "F898:3FFA:86091:8AC9D:5C650A05",
-  "content-length": "377",
+  "x-github-request-id": "BA70:2AB6:2F1131:43F8AA:6168331B",
+  "content-encoding": "gzip",
   "accept-ranges": "bytes",
-  "date": "Thu, 14 Feb 2019 06:28:32 GMT",
+  "date": "Thu, 14 Oct 2021 15:27:47 GMT",
   "via": "1.1 varnish",
-  "connection": "close",
-  "x-served-by": "cache-lax8636-LAX",
-  "x-cache": "HIT",
-  "x-cache-hits": "1",
-  "x-timer": "S1550125713.983617,VS0,VE0",
-  "vary": "Authorization,Accept-Encoding",
+  "x-served-by": "cache-sna10736-LGB",
+  "x-cache": "MISS",
+  "x-cache-hits": "0",
+  "x-timer": "S1634225267.975913,VS0,VE161",
+  "vary": "Authorization,Accept-Encoding,Origin",
   "access-control-allow-origin": "*",
-  "x-fastly-request-id": "87321221ca0c6b21609525f0925cd30a0e838d30",
-  "expires": "Thu, 14 Feb 2019 06:33:32 GMT",
-  "source-age": "136"
+  "x-fastly-request-id": "8e82201bcf54bd910d7bf0aabc3d20032793c0b2",
+  "expires": "Thu, 14 Oct 2021 15:32:47 GMT",
+  "source-age": "0"
 }
 
 Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
@@ -80,20 +80,19 @@ Chain of URL redirects:
 HTTP response headers of final request:
 ----------------------------------
 {
-  "transfer-encoding": "chunked",
   "access-control-allow-origin": "https://render.githubusercontent.com",
+  "content-disposition": "attachment; filename=node-denodeify-master.zip",
+  "content-length": "21236",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+  "content-type": "application/zip",
+  "etag": "W/\"85cfb8762a30b4006b9290646de94b8ece56cd27a497ae21f03b7540e120780c\"",
   "strict-transport-security": "max-age=31536000",
-  "vary": "Authorization,Accept-Encoding",
+  "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "etag": "\"e5f69b048f9e4b17ca12314f6654130df91bbcda\"",
-  "content-type": "application/zip",
-  "content-disposition": "attachment; filename=node-denodeify-master.zip",
-  "x-geo-block-list": "",
-  "date": "Thu, 14 Feb 2019 06:28:34 GMT",
-  "x-github-request-id": "D1A8:0692:36AA4:6A8D6:5C650A91",
+  "date": "Thu, 14 Oct 2021 15:27:48 GMT",
+  "x-github-request-id": "C270:0B01:231850:5A78F4:61684C74",
   "connection": "close"
 }
 
@@ -110,20 +109,19 @@ Chain of URL redirects:
 HTTP response headers of final request:
 ----------------------------------
 {
-  "transfer-encoding": "chunked",
   "access-control-allow-origin": "https://render.githubusercontent.com",
+  "content-disposition": "attachment; filename=node-denodeify-master.zip",
+  "content-length": "21236",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+  "content-type": "application/zip",
+  "etag": "W/\"85cfb8762a30b4006b9290646de94b8ece56cd27a497ae21f03b7540e120780c\"",
   "strict-transport-security": "max-age=31536000",
-  "vary": "Authorization,Accept-Encoding",
+  "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "etag": "\"e5f69b048f9e4b17ca12314f6654130df91bbcda\"",
-  "content-type": "application/zip",
-  "content-disposition": "attachment; filename=node-denodeify-master.zip",
-  "x-geo-block-list": "",
-  "date": "Thu, 14 Feb 2019 06:28:34 GMT",
-  "x-github-request-id": "D1AA:411E:337E0:640B7:5C650A92",
+  "date": "Thu, 14 Oct 2021 15:27:48 GMT",
+  "x-github-request-id": "C272:3E38:2127B6:581C39:61684C74",
   "connection": "close"
 }
 
@@ -135,7 +133,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-e5f69b048f9e4b17ca12314f6654130df91bbcda
+84d4cd79c15fb49e91eb09092efd3de9fd826104
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -162,7 +160,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-e5f69b048f9e4b17ca12314f6654130df91bbcda
+84d4cd79c15fb49e91eb09092efd3de9fd826104
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -193,18 +191,17 @@ URL of request:
 HTTP response headers of request:
 ----------------------------------
 {
-  "connection": "close",
-  "server": "gunicorn/19.9.0",
-  "date": "Thu, 14 Feb 2019 06:28:35 GMT",
+  "date": "Thu, 14 Oct 2021 15:27:49 GMT",
   "content-type": "text/html; charset=utf-8",
   "content-length": "223",
+  "connection": "close",
+  "server": "gunicorn/19.9.0",
   "location": "/cookies",
   "set-cookie": [
-    "foo=bar; Secure; Path=/"
+    "foo=bar; Path=/"
   ],
   "access-control-allow-origin": "*",
-  "access-control-allow-credentials": "true",
-  "via": "1.1 vegur"
+  "access-control-allow-credentials": "true"
 }
 
 --------------------------------------------------------------------
@@ -223,7 +220,7 @@ Data response for URL of request:
 Content of cookie jar in default JSON format:
   > cat cookies.json
 ---------------------------------------
-{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","secure":true,"hostOnly":true,"creation":"2019-02-14T06:28:34.998Z","lastAccessed":"2019-02-14T06:28:34.998Z"}}}}
+{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2021-10-14T15:27:46.835Z","lastAccessed":"2021-10-14T15:27:46.835Z"}}}}
 
 --------------------------------------------------------------------
 Content of cookie jar after conversion to Netscape format:
@@ -233,7 +230,7 @@ Content of cookie jar after conversion to Netscape format:
 # http://www.netscape.com/newsref/std/cookie_spec.html
 # This is a generated file!  Do not edit.
 
-httpbin.org	FALSE	/	TRUE	0	foo	bar
+httpbin.org	FALSE	/	FALSE	0	foo	bar
 
 
 --------------------------------------------------------------------
@@ -248,9 +245,8 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         "value": "bar",
         "domain": "httpbin.org",
         "path": "/",
-        "secure": true,
         "hostOnly": true,
-        "creation": "2019-02-14T06:28:35.003Z"
+        "creation": "2021-10-14T15:27:46.840Z"
       }
     }
   }
@@ -276,5 +272,208 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
 --------------------------------------------------------------------
 {"url":"https://httpbin.org/delete","querystring":{},"data":"my-data=stream&my-method=DELETE","headers":{"Content-Length":"31"}}
 
+--------------------------------------------------------------------
+{"method":"GET","data":"","headers":{"Content-Length":"30"}}
+
+--------------------------------------------------------------------
+{"method":"GET","data":"","headers":{"Content-Length":"33"}}
+
+--------------------------------------------------------------------
+{"method":"GET","data":"","headers":{"Content-Length":"32"}}
+
+######################################################################
+
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/gzip",
+        "encoding": "gzip",
+        "stream": false,
+        "binary": false
+    },
+    "response": {
+        "gzipped": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/gzip",
+        "encoding": "gzip",
+        "stream": false,
+        "binary": true
+    },
+    "response": {
+        "gzipped": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/gzip",
+        "encoding": "gzip",
+        "stream": true,
+        "binary": false
+    },
+    "response": {
+        "gzipped": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/gzip",
+        "encoding": "gzip",
+        "stream": true,
+        "binary": true
+    },
+    "response": {
+        "gzipped": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/deflate",
+        "encoding": "deflate",
+        "stream": false,
+        "binary": false
+    },
+    "response": {
+        "deflated": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/deflate",
+        "encoding": "deflate",
+        "stream": false,
+        "binary": true
+    },
+    "response": {
+        "deflated": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/deflate",
+        "encoding": "deflate",
+        "stream": true,
+        "binary": false
+    },
+    "response": {
+        "deflated": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/deflate",
+        "encoding": "deflate",
+        "stream": true,
+        "binary": true
+    },
+    "response": {
+        "deflated": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/brotli",
+        "encoding": "brotli",
+        "stream": false,
+        "binary": false
+    },
+    "response": {
+        "brotli": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/brotli",
+        "encoding": "brotli",
+        "stream": false,
+        "binary": true
+    },
+    "response": {
+        "brotli": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/brotli",
+        "encoding": "brotli",
+        "stream": true,
+        "binary": false
+    },
+    "response": {
+        "brotli": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
+--------------------------------------------------------------------
+{
+    "context": {
+        "url": "https://httpbin.org/brotli",
+        "encoding": "brotli",
+        "stream": true,
+        "binary": true
+    },
+    "response": {
+        "brotli": true,
+        "headers": {
+            "Host": "httpbin.org",
+            "Accept-Encoding": "identity, gzip, deflate, br"
+        }
+    }
+}
 ######################################################################
 

@@ -88,6 +88,21 @@ const run_test = async function(){
   await request(Object.assign({}, req_options, {method: 'DELETE', path: '/delete'}), 'my-method=DELETE&my-data=stream')
   .then(process_text_request_metadata_success)
   .catch(process_error)
+
+  // example: perform a GET and accept encoding: gzip
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/gzip'}), 'my-method=GET&my-encoding=gzip')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a GET and accept encoding: deflate
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/deflate'}), 'my-method=GET&my-encoding=deflate')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a GET and accept encoding: brotli (br)
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/brotli'}), 'my-method=GET&my-encoding=brotli')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
 }
 
 run_test()
