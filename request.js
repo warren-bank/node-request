@@ -13,7 +13,7 @@ const https = {
 }
 
 const get_url_from_request_options = function(req_options){
-  return `${req_options.protocol}//${req_options.host}:${req_options.port}${req_options.path}`
+  return `${req_options.protocol || 'http:'}//${req_options.host || 'localhost:80'}${req_options.path || '/'}`
 }
 
 const make_net_request = function(req_options, POST_data='', opts={}){
