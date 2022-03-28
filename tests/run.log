@@ -487,3 +487,38 @@ request method: PATCH
 
 ######################################################################
 
+--------------------------------------------------------------------
+URL of initial request:
+  https://httpbin.org/post
+
+Chain of URL redirects:
+  []
+
+Data in response for last URL:
+----------------------------------
+{
+  "args": {}, 
+  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:24.40636\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"gvBRpg-6RZSl2JDIET3nqg\",\"updated_at\":\"2020-01-05 13:42:24.40636\",\"url\":\"https://api.chucknorris.io/jokes/gvBRpg-6RZSl2JDIET3nqg\",\"value\":\"Kids play jumprope. Chuck Norris plays jumpanaconda.\"}", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept-Encoding": "identity, gzip, deflate, br", 
+    "Content-Type": "application/octet-stream", 
+    "Host": "httpbin.org", 
+    "Transfer-Encoding": "chunked", 
+    "X-Amzn-Trace-Id": "Root=1-6241c236-10418cc476311cf13e7d0c25"
+  }, 
+  "json": {
+    "categories": [], 
+    "created_at": "2020-01-05 13:42:24.40636", 
+    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png", 
+    "id": "gvBRpg-6RZSl2JDIET3nqg", 
+    "updated_at": "2020-01-05 13:42:24.40636", 
+    "url": "https://api.chucknorris.io/jokes/gvBRpg-6RZSl2JDIET3nqg", 
+    "value": "Kids play jumprope. Chuck Norris plays jumpanaconda."
+  }, 
+  "url": "https://httpbin.org/post"
+}
+
+######################################################################
+
