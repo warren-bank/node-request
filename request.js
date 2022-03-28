@@ -16,7 +16,7 @@ const get_url_from_request_options = function(req_options){
   return `${req_options.protocol || 'http:'}//${req_options.host || 'localhost:80'}${req_options.path || '/'}`
 }
 
-const make_net_request = function(req_options, POST_data='', opts={}){
+const make_net_request = function(req_method, req_options, POST_data='', opts={}){
   const regex = /^https/i
 
   const is_url = (typeof req_options === 'string')
@@ -91,7 +91,9 @@ const make_net_request = function(req_options, POST_data='', opts={}){
       }
 
       if (typeof _req_options['method'] !== 'string'){
-        _req_options['method'] = (is_POST ? 'POST' : 'GET')
+        _req_options['method'] = (req_method && (typeof req_method === 'string'))
+          ? req_method
+          : (is_POST ? 'POST' : 'GET')
       }
 
       if (!(_req_options['headers'] instanceof Object)){
@@ -176,4 +178,14 @@ const make_net_request = function(req_options, POST_data='', opts={}){
   })
 }
 
-module.exports = {request: make_net_request, denodeify, denodeify_net_request}
+const request   = make_net_request.bind(this, null)
+request.get     = make_net_request.bind(this, 'GET')
+request.post    = make_net_request.bind(this, 'POST')
+request.put     = make_net_request.bind(this, 'PUT')
+request.patch   = make_net_request.bind(this, 'PATCH')
+request.delete  = make_net_request.bind(this, 'DELETE')
+request.del     = make_net_request.bind(this, 'DELETE')
+request.head    = make_net_request.bind(this, 'HEAD')
+request.options = make_net_request.bind(this, 'OPTIONS')
+
+module.exports = {request, denodeify, denodeify_net_request}

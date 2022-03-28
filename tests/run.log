@@ -12,28 +12,29 @@ HTTP response headers of final request:
 ----------------------------------
 {
   "connection": "close",
-  "content-length": "239",
+  "content-length": "240",
   "cache-control": "max-age=300",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "text/plain; charset=utf-8",
-  "etag": "W/\"99360077048aa5e0ead6ac00cc842b66e7e90f4801b9d9fb057fec8ea3ee8480\"",
+  "etag": "W/\"0d830603a121bb738c9fd21a08281fe4bffbdec6f307ff24a89b261983df4f4d\"",
   "strict-transport-security": "max-age=31536000",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "x-github-request-id": "BA70:2AB6:2F1131:43F8AA:6168331B",
+  "x-github-request-id": "1B90:850D:4A7337:681F20:62419492",
   "content-encoding": "gzip",
+  "fastly-original-body-size": "0",
   "accept-ranges": "bytes",
-  "date": "Thu, 14 Oct 2021 15:27:47 GMT",
+  "date": "Mon, 28 Mar 2022 11:43:06 GMT",
   "via": "1.1 varnish",
-  "x-served-by": "cache-sna10736-LGB",
+  "x-served-by": "cache-bur-kbur8200130-BUR",
   "x-cache": "MISS",
   "x-cache-hits": "0",
-  "x-timer": "S1634225267.975913,VS0,VE161",
+  "x-timer": "S1648467787.816771,VS0,VE151",
   "vary": "Authorization,Accept-Encoding,Origin",
   "access-control-allow-origin": "*",
-  "x-fastly-request-id": "8e82201bcf54bd910d7bf0aabc3d20032793c0b2",
-  "expires": "Thu, 14 Oct 2021 15:32:47 GMT",
+  "x-fastly-request-id": "cabc26b245807f9366a295c1d42508f07f92e2d3",
+  "expires": "Mon, 28 Mar 2022 11:48:06 GMT",
   "source-age": "0"
 }
 
@@ -41,7 +42,7 @@ Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
@@ -75,24 +76,24 @@ URL of initial request:
   https://github.com/warren-bank/node-denodeify/archive/master.zip
 
 Chain of URL redirects:
-  https://codeload.github.com/warren-bank/node-denodeify/zip/master
+  https://codeload.github.com/warren-bank/node-denodeify/zip/refs/heads/master
 
 HTTP response headers of final request:
 ----------------------------------
 {
   "access-control-allow-origin": "https://render.githubusercontent.com",
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
-  "content-length": "21236",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"85cfb8762a30b4006b9290646de94b8ece56cd27a497ae21f03b7540e120780c\"",
+  "etag": "W/\"e453657d15b37fd104a72d4b8db15afce79a5c1e9963cff16278e59d29dca9e7\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Thu, 14 Oct 2021 15:27:48 GMT",
-  "x-github-request-id": "C270:0B01:231850:5A78F4:61684C74",
+  "date": "Mon, 28 Mar 2022 11:43:08 GMT",
+  "transfer-encoding": "chunked",
+  "x-github-request-id": "DD85:2F63:1AB1DC:39C2A4:62419F4B",
   "connection": "close"
 }
 
@@ -104,24 +105,24 @@ URL of initial request:
   https://github.com/warren-bank/node-denodeify/archive/master.zip
 
 Chain of URL redirects:
-  https://codeload.github.com/warren-bank/node-denodeify/zip/master
+  https://codeload.github.com/warren-bank/node-denodeify/zip/refs/heads/master
 
 HTTP response headers of final request:
 ----------------------------------
 {
   "access-control-allow-origin": "https://render.githubusercontent.com",
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
-  "content-length": "21236",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"85cfb8762a30b4006b9290646de94b8ece56cd27a497ae21f03b7540e120780c\"",
+  "etag": "W/\"e453657d15b37fd104a72d4b8db15afce79a5c1e9963cff16278e59d29dca9e7\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Thu, 14 Oct 2021 15:27:48 GMT",
-  "x-github-request-id": "C272:3E38:2127B6:581C39:61684C74",
+  "date": "Mon, 28 Mar 2022 11:43:08 GMT",
+  "transfer-encoding": "chunked",
+  "x-github-request-id": "DD87:7FE0:16EFE2:32FF15:62419F4C",
   "connection": "close"
 }
 
@@ -133,7 +134,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-84d4cd79c15fb49e91eb09092efd3de9fd826104
+97ebd1b0a4ed3a1f27a746ed9ae7808c186638b9
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -160,7 +161,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-84d4cd79c15fb49e91eb09092efd3de9fd826104
+97ebd1b0a4ed3a1f27a746ed9ae7808c186638b9
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -191,7 +192,7 @@ URL of request:
 HTTP response headers of request:
 ----------------------------------
 {
-  "date": "Thu, 14 Oct 2021 15:27:49 GMT",
+  "date": "Mon, 28 Mar 2022 11:43:09 GMT",
   "content-type": "text/html; charset=utf-8",
   "content-length": "223",
   "connection": "close",
@@ -220,7 +221,7 @@ Data response for URL of request:
 Content of cookie jar in default JSON format:
   > cat cookies.json
 ---------------------------------------
-{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2021-10-14T15:27:46.835Z","lastAccessed":"2021-10-14T15:27:46.835Z"}}}}
+{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-03-28T11:43:07.445Z","lastAccessed":"2022-03-28T11:43:07.445Z"}}}}
 
 --------------------------------------------------------------------
 Content of cookie jar after conversion to Netscape format:
@@ -246,7 +247,7 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         "domain": "httpbin.org",
         "path": "/",
         "hostOnly": true,
-        "creation": "2021-10-14T15:27:46.840Z"
+        "creation": "2022-03-28T11:43:07.461Z"
       }
     }
   }
@@ -475,5 +476,14 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         }
     }
 }
+######################################################################
+
+request method: DELETE
+request method: DELETE
+request method: GET
+request method: POST
+request method: PUT
+request method: PATCH
+
 ######################################################################
 

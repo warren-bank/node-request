@@ -15,6 +15,8 @@ It also exports 2 additional functions that are [included as dependencies](https
 npm install --save @warren-bank/node-request
 ```
 
+- - - -
+
 #### API:
 
 __request(options[, POST_data, config])__
@@ -216,6 +218,22 @@ request('https://github.com/warren-bank/node-denodeify/archive/master.zip', '', 
 .then((data) => {process_binary_stream_success(data, 'denodeify.Stream.zip')})
 .catch(process_error)
 ```
+
+- - - -
+
+#### Convenience methods:
+
+These HTTP method convenience functions act just like `request()` but with a default method:
+
+- *request.get()*: Defaults to `method: "GET"`.
+- *request.post()*: Defaults to `method: "POST"`.
+- *request.put()*: Defaults to `method: "PUT"`.
+- *request.patch()*: Defaults to `method: "PATCH"`.
+- *request.delete() / request.del()*: Defaults to `method: "DELETE"`.
+- *request.head()*: Defaults to `method: "HEAD"`.
+- *request.options()*: Defaults to `method: "OPTIONS"`.
+
+- - - -
 
 #### Requirements:
 
