@@ -12,29 +12,28 @@ HTTP response headers of final request:
 ----------------------------------
 {
   "connection": "close",
-  "content-length": "240",
+  "content-length": "241",
   "cache-control": "max-age=300",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "text/plain; charset=utf-8",
-  "etag": "W/\"0d830603a121bb738c9fd21a08281fe4bffbdec6f307ff24a89b261983df4f4d\"",
+  "etag": "W/\"30caa283b7d82f9283a26d8eeb59702b235140659892385a835c0532d2f26f75\"",
   "strict-transport-security": "max-age=31536000",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "x-github-request-id": "1B90:850D:4A7337:681F20:62419492",
+  "x-github-request-id": "CF84:1077:257F57:3577BA:6242B664",
   "content-encoding": "gzip",
-  "fastly-original-body-size": "0",
   "accept-ranges": "bytes",
-  "date": "Mon, 28 Mar 2022 11:43:06 GMT",
+  "date": "Tue, 29 Mar 2022 07:33:56 GMT",
   "via": "1.1 varnish",
-  "x-served-by": "cache-bur-kbur8200130-BUR",
+  "x-served-by": "cache-bur-kbur8200099-BUR",
   "x-cache": "MISS",
   "x-cache-hits": "0",
-  "x-timer": "S1648467787.816771,VS0,VE151",
+  "x-timer": "S1648539236.249777,VS0,VE201",
   "vary": "Authorization,Accept-Encoding,Origin",
   "access-control-allow-origin": "*",
-  "x-fastly-request-id": "cabc26b245807f9366a295c1d42508f07f92e2d3",
-  "expires": "Mon, 28 Mar 2022 11:48:06 GMT",
+  "x-fastly-request-id": "c68d3a3382aa214d48e0e5619920e6543fd435ff",
+  "expires": "Tue, 29 Mar 2022 07:38:56 GMT",
   "source-age": "0"
 }
 
@@ -42,7 +41,7 @@ Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
@@ -85,15 +84,15 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"e453657d15b37fd104a72d4b8db15afce79a5c1e9963cff16278e59d29dca9e7\"",
+  "etag": "W/\"da1f16b08aa0b4da4fbd2bd67b3a637cc534646fde1e9cb590397e3d2b3c57c8\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Mon, 28 Mar 2022 11:43:08 GMT",
+  "date": "Tue, 29 Mar 2022 07:33:57 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "DD85:2F63:1AB1DC:39C2A4:62419F4B",
+  "x-github-request-id": "E63F:2788:22C5FC:3F9FE1:6242B665",
   "connection": "close"
 }
 
@@ -114,15 +113,15 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"e453657d15b37fd104a72d4b8db15afce79a5c1e9963cff16278e59d29dca9e7\"",
+  "etag": "W/\"da1f16b08aa0b4da4fbd2bd67b3a637cc534646fde1e9cb590397e3d2b3c57c8\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Mon, 28 Mar 2022 11:43:08 GMT",
+  "date": "Tue, 29 Mar 2022 07:33:58 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "DD87:7FE0:16EFE2:32FF15:62419F4C",
+  "x-github-request-id": "E641:6A48:1CE4D6:3F615B:6242B666",
   "connection": "close"
 }
 
@@ -134,7 +133,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-97ebd1b0a4ed3a1f27a746ed9ae7808c186638b9
+0b01e751625f09cd2f7a8457aae58cfb773c69c7
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -161,7 +160,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-97ebd1b0a4ed3a1f27a746ed9ae7808c186638b9
+0b01e751625f09cd2f7a8457aae58cfb773c69c7
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -192,7 +191,7 @@ URL of request:
 HTTP response headers of request:
 ----------------------------------
 {
-  "date": "Mon, 28 Mar 2022 11:43:09 GMT",
+  "date": "Tue, 29 Mar 2022 07:33:59 GMT",
   "content-type": "text/html; charset=utf-8",
   "content-length": "223",
   "connection": "close",
@@ -221,7 +220,7 @@ Data response for URL of request:
 Content of cookie jar in default JSON format:
   > cat cookies.json
 ---------------------------------------
-{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-03-28T11:43:07.445Z","lastAccessed":"2022-03-28T11:43:07.445Z"}}}}
+{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-03-29T07:33:55.170Z","lastAccessed":"2022-03-29T07:33:55.170Z"}}}}
 
 --------------------------------------------------------------------
 Content of cookie jar after conversion to Netscape format:
@@ -247,7 +246,7 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         "domain": "httpbin.org",
         "path": "/",
         "hostOnly": true,
-        "creation": "2022-03-28T11:43:07.461Z"
+        "creation": "2022-03-29T07:33:55.183Z"
       }
     }
   }
@@ -480,10 +479,10 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
 
 request method: DELETE
 request method: DELETE
+request method: PATCH
 request method: GET
 request method: POST
 request method: PUT
-request method: PATCH
 
 ######################################################################
 
@@ -519,6 +518,217 @@ Data in response for last URL:
   }, 
   "url": "https://httpbin.org/post"
 }
+
+######################################################################
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+undefined
+
+Normalized request options:
+----------------------------------
+null
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+null
+
+Normalized request options:
+----------------------------------
+null
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+"about:blank"
+
+Normalized request options:
+----------------------------------
+"about:blank"
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+"https://foo.com/bar/baz.html"
+
+Normalized request options:
+----------------------------------
+"https://foo.com/bar/baz.html"
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+[
+  "about:blank"
+]
+
+Normalized request options:
+----------------------------------
+null
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+[
+  "https://foo.com/bar/baz.html"
+]
+
+Normalized request options:
+----------------------------------
+{
+  "protocol": "https:",
+  "slashes": true,
+  "auth": null,
+  "host": "foo.com",
+  "port": null,
+  "hostname": "foo.com",
+  "hash": null,
+  "search": null,
+  "query": null,
+  "pathname": "/bar/baz.html",
+  "path": "/bar/baz.html",
+  "href": "https://foo.com/bar/baz.html"
+}
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+[
+  "https://foo.com:8080/bar/baz.html?hello=world"
+]
+
+Normalized request options:
+----------------------------------
+{
+  "protocol": "https:",
+  "slashes": true,
+  "auth": null,
+  "host": "foo.com:8080",
+  "port": "8080",
+  "hostname": "foo.com",
+  "hash": null,
+  "search": "?hello=world",
+  "query": "hello=world",
+  "pathname": "/bar/baz.html",
+  "path": "/bar/baz.html?hello=world",
+  "href": "https://foo.com:8080/bar/baz.html?hello=world"
+}
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+[
+  "https://foo.com:8080/bar/baz.html?hello=world",
+  {
+    "port": "9090",
+    "pathname": "/rab/zab.php",
+    "query": "goodbye=world"
+  }
+]
+
+Normalized request options:
+----------------------------------
+{
+  "protocol": "https:",
+  "slashes": true,
+  "auth": null,
+  "host": "foo.com:9090",
+  "port": "9090",
+  "hostname": "foo.com",
+  "hash": null,
+  "search": "?goodbye=world",
+  "query": "goodbye=world",
+  "pathname": "/rab/zab.php",
+  "path": "/rab/zab.php?goodbye=world",
+  "href": "https://foo.com:9090/rab/zab.php?goodbye=world"
+}
+
+--------------------------------------------------------------------
+Original request options:
+----------------------------------
+[
+  "https://foo.com:8080/bar/baz.html?hello=world",
+  {
+    "port": null,
+    "pathname": "/rab/zab.php",
+    "query": "goodbye=world"
+  },
+  {
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+]
+
+Normalized request options:
+----------------------------------
+{
+  "protocol": "https:",
+  "slashes": true,
+  "auth": null,
+  "host": "foo.com",
+  "port": null,
+  "hostname": "foo.com",
+  "hash": null,
+  "search": "?goodbye=world",
+  "query": "goodbye=world",
+  "pathname": "/rab/zab.php",
+  "path": "/rab/zab.php?goodbye=world",
+  "href": "https://foo.com/rab/zab.php?goodbye=world",
+  "headers": {
+    "content-type": "application/json"
+  }
+}
+
+--------------------------------------------------------------------
+Error:
+  missing required input parameter: request options / URL string
+
+HTTP status code:
+  unavailable
+
+URL of initial request:
+  unavailable
+
+Chain of URL redirects:
+  []
+
+Unfollowed redirect:
+  none
+
+--------------------------------------------------------------------
+Error:
+  bad URL
+
+HTTP status code:
+  400
+
+URL of initial request:
+  about:blank
+
+Chain of URL redirects:
+  []
+
+Unfollowed redirect:
+  none
+
+--------------------------------------------------------------------
+Error:
+  bad URL: 3xx redirect
+
+HTTP status code:
+  400
+
+URL of initial request:
+  http://httpbingo.org/redirect-to?url=about%3Ablank&status_code=301
+
+Chain of URL redirects:
+  []
+
+Unfollowed redirect:
+  about:blank
 
 ######################################################################
 

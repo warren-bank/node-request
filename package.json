@@ -1,6 +1,6 @@
 {
   "name": "@warren-bank/node-request",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "main": "request.js",
   "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies. Returns: Promise.",
   "author": "Warren Bank (https://github.com/warren-bank)",

@@ -1,5 +1,4 @@
 const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify')
-const parse_url = require('url').parse
 const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
 const {getRequestHeaderAcceptEncoding, processResponseContentEncoding} = require('./lib/zlib_utils')
 const {normalizeRequestOptions, normalizePath} = require('./lib/url_utils')
@@ -81,16 +80,35 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
           _req_options = url
         }
         else {
-          _req_options = Object.assign(
-            {},
-            req_options,
-            parse_url(url)
-          )
+          // parse URL string to Object, and validate format
+          _req_options = normalizeRequestOptions([url])
+
+          // if OK, combine with default attributes
+          if (_req_options) {
+            _req_options = normalizeRequestOptions([req_options, _req_options])
+          }
         }
       }
 
       if (typeof _req_options === 'string'){
-        _req_options = parse_url(_req_options)
+        // parse URL string to Object, and validate format
+        _req_options = normalizeRequestOptions([_req_options])
+      }
+
+      if (!(_req_options && (_req_options instanceof Object))) {
+        if (url === undefined){
+          // bad URL
+          _error = new Error('bad URL')
+        }
+        else {
+          // bad 3xx redirect
+          _error = new Error('bad URL: 3xx redirect')
+          _error.location = url
+        }
+        _error.statusCode = 400
+        _error.url = original_url
+        reject(_error)
+        return
       }
 
       if (typeof _req_options['method'] !== 'string'){
@@ -106,7 +124,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
         _req_options['headers']['accept-encoding'] = getRequestHeaderAcceptEncoding()
       }
 
-      if (config.normalizePath) {
+      if (config.normalizePath){
         normalizePath(_req_options)
       }
 
@@ -134,8 +152,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
 
         data = await processResponseContentEncoding(data, cb_options)
 
-        if (!is_binary) {
-          if (cb_options.stream) {
+        if (!is_binary){
+          if (cb_options.stream){
             data.setEncoding('utf8')
           }
           else {
