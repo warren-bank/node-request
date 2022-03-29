@@ -51,6 +51,6 @@ Unfollowed redirect:
 // 2. pipe this Readable stream to the POST data of a 2nd request
 // 3. content of response echoes all data sent in 2nd request, which should contain a Chuck Norris joke
 request.get('https://api.chucknorris.io/jokes/random', '', {binary: true, stream: true})
-.then(data => request.post('https://httpbin.org/post', data.response))
+.then(data => request.post(['https://httpbin.org/post', {headers: {'content-type': 'application/json'}}], data.response))
 .then(process_success)
 .catch(process_error)

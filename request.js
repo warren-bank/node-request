@@ -2,7 +2,7 @@ const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify'
 const parse_url = require('url').parse
 const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
 const {getRequestHeaderAcceptEncoding, processResponseContentEncoding} = require('./lib/zlib_utils')
-const {normalizePath} = require('./lib/url_utils')
+const {normalizeRequestOptions, normalizePath} = require('./lib/url_utils')
 
 const http = {
   request: denodeify_net_request( require('http').request )
@@ -17,6 +17,9 @@ const get_url_from_request_options = function(req_options){
 }
 
 const make_net_request = function(req_method, req_options, POST_data='', opts={}){
+  req_options = normalizeRequestOptions(req_options)
+  if (!req_options) return Promise.reject(new Error('missing required input parameter: request options / URL string'))
+
   const regex = /^https/i
 
   const is_url = (typeof req_options === 'string')
@@ -25,7 +28,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
 
   const original_url = is_url ? req_options : get_url_from_request_options(req_options)
 
-  var cb_options = {binary: true}
+  const cb_options = {binary: true}
   if ('validate_status_code' in opts){
     cb_options['validate_status_code'] = opts.validate_status_code
     delete opts.validate_status_code
@@ -54,8 +57,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
   config.cookieJar = getCookieJar(config.cookieJar)
 
   return new Promise((resolve, reject) => {
-    var redirects = []
-    var _is_https, _req_options, _protocol, _error
+    const redirects = []
+    let _is_https, _req_options, _protocol, _error
 
     const send_net_request = async function(url){
 

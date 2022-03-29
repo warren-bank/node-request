@@ -21,15 +21,33 @@ npm install --save @warren-bank/node-request
 
 __request(options[, POST_data, config])__
 
-* `options` {Object} | {string}
-  * for a complete list of all attributes,<br>
-    please refer to the Node.js api documentation for:
-    * [http.request](https://nodejs.org/api/http.html#http_http_request_options_callback)
-    * [https.request](https://nodejs.org/api/https.html#https_https_request_options_callback)
-* `POST_data` {Object} | {string}
-  * key/value pairs that are written to the Request object
-  * {string} value takes the form: `"a=1&b=2"`
-  * {Object} value takes the form: `{a:1,b:2}`
+* `options` {string} | {Object} | {Array<{string} | {Object}>}
+  * {string} value
+    * expected to contain a URL
+  * {Object} value
+    * for a complete list of all attributes,<br>
+      please refer to the Node.js api documentation for:
+      * [http.request](https://nodejs.org/api/http.html#http_http_request_options_callback)
+      * [https.request](https://nodejs.org/api/https.html#https_https_request_options_callback)
+  * {Array<>} value
+    * {string} URL values are parsed to {Object} values
+    * combines its elements into a single {Object} value
+* `POST_data` {string} | {Object} | {Buffer} | {stream.Readable}
+  * {string} value
+    * when _Content-Type_ header is undefined
+      * _Content-Type_ header is given the value: _'application/x-www-form-urlencoded'_
+  * {Object} value
+    * is serialized to a {string} value based on the value of _Content-Type_ header
+      * _'application/json'_:
+        * converted to JSON
+      * otherwise:
+        * converted to querystring format
+        * ex: `"a=1&b=2"`
+    * when _Content-Type_ header is undefined
+      * _Content-Type_ header is given the value: _'application/x-www-form-urlencoded'_
+  * {Buffer} | {stream.Readable} values
+    * when _Content-Type_ header is undefined
+      * _Content-Type_ header is given the value: _'application/octet-stream'_
 * `config` {Object}
   * `normalizePath` {Boolean} (defaults to `true`)
   * `followRedirect` {Boolean} (defaults to `true`)

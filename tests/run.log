@@ -498,24 +498,24 @@ Data in response for last URL:
 ----------------------------------
 {
   "args": {}, 
-  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:24.40636\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"gvBRpg-6RZSl2JDIET3nqg\",\"updated_at\":\"2020-01-05 13:42:24.40636\",\"url\":\"https://api.chucknorris.io/jokes/gvBRpg-6RZSl2JDIET3nqg\",\"value\":\"Kids play jumprope. Chuck Norris plays jumpanaconda.\"}", 
+  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:28.984661\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"U42BlItTRSiD6EPoTlIBXA\",\"updated_at\":\"2020-01-05 13:42:28.984661\",\"url\":\"https://api.chucknorris.io/jokes/U42BlItTRSiD6EPoTlIBXA\",\"value\":\"Chuck Norris isn't a cannibal, because he is actually a superior species. So next time he devours a family member, don't be upset, just remember this is just the beautiful cycle of nature.\"}", 
   "files": {}, 
   "form": {}, 
   "headers": {
     "Accept-Encoding": "identity, gzip, deflate, br", 
-    "Content-Type": "application/octet-stream", 
+    "Content-Type": "application/json", 
     "Host": "httpbin.org", 
     "Transfer-Encoding": "chunked", 
-    "X-Amzn-Trace-Id": "Root=1-6241c236-10418cc476311cf13e7d0c25"
+    "X-Amzn-Trace-Id": "Root=1-62425bc8-169fd72d050a8e16322e166e"
   }, 
   "json": {
     "categories": [], 
-    "created_at": "2020-01-05 13:42:24.40636", 
+    "created_at": "2020-01-05 13:42:28.984661", 
     "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png", 
-    "id": "gvBRpg-6RZSl2JDIET3nqg", 
-    "updated_at": "2020-01-05 13:42:24.40636", 
-    "url": "https://api.chucknorris.io/jokes/gvBRpg-6RZSl2JDIET3nqg", 
-    "value": "Kids play jumprope. Chuck Norris plays jumpanaconda."
+    "id": "U42BlItTRSiD6EPoTlIBXA", 
+    "updated_at": "2020-01-05 13:42:28.984661", 
+    "url": "https://api.chucknorris.io/jokes/U42BlItTRSiD6EPoTlIBXA", 
+    "value": "Chuck Norris isn't a cannibal, because he is actually a superior species. So next time he devours a family member, don't be upset, just remember this is just the beautiful cycle of nature."
   }, 
   "url": "https://httpbin.org/post"
 }
