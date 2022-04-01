@@ -1,6 +1,6 @@
 ### [request](https://github.com/warren-bank/node-request)
 
-An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies. Returns: Promise.
+An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies, content-encoding, multipart/form-data. Returns: Promise.
 
 The module includes 1 function:
   * `request`
@@ -21,7 +21,7 @@ npm install --save @warren-bank/node-request
 
 __request(options[, POST_data, config])__
 
-* `options` {string} | {Object} | {Array<{string} | {Object}>}
+* `options` {string} | {Object} | {Array&lt;{string} | {Object}>}
   * {string} value
     * expected to contain a URL
   * {Object} value
@@ -29,10 +29,10 @@ __request(options[, POST_data, config])__
       please refer to the Node.js api documentation for:
       * [http.request](https://nodejs.org/api/http.html#http_http_request_options_callback)
       * [https.request](https://nodejs.org/api/https.html#https_https_request_options_callback)
-  * {Array<>} value
+  * {Array&lt;>} value
     * {string} URL values are parsed to {Object} values
     * combines its elements into a single {Object} value
-* `POST_data` {string} | {Object} | {Buffer} | {stream.Readable}
+* `POST_data` {string} | {Object} | {Buffer} | {stream.Readable} | {Array&lt;Object>}
   * {string} value
     * when _Content-Type_ header is undefined
       * _Content-Type_ header is given the value: _'application/x-www-form-urlencoded'_
@@ -48,6 +48,35 @@ __request(options[, POST_data, config])__
   * {Buffer} | {stream.Readable} values
     * when _Content-Type_ header is undefined
       * _Content-Type_ header is given the value: _'application/octet-stream'_
+  * {Array&lt;Object>} value
+    * _Content-Type_ header is given the value: _'multipart/form-data'_
+    * {Object} value required attributes:
+      1. `name`
+         * type: {string}
+      2. `value`
+         * type: {string} | {number} | {Buffer} | {Object}
+         * {string} | {number} | {Buffer} values
+           * sent verbatim
+         * {Object} value attributes:
+           1. `file`
+              * type: {stream.Readable}
+           2. `filename`
+              * type: {string}
+              * when `file` is undefined:
+                * required
+                * value is an absolute filepath to a file that exists and is readable
+              * when `file` is defined:
+                * optional
+                * value only needs a filename
+           3. `mime` or `mime-type` or `content-type` or `headers.content-type`
+              * type: {string}
+              * prioritized as given, in descending order
+              * highest priority value sets the _Content-Type_ header for the file
+              * when no value is defined:
+                * if `filename` is defined:
+                  * file extension in `filename` is used to infer the _Content-Type_ header for the file
+                * otherwise:
+                  * _Content-Type_ header for the file is given the value: _'application/octet-stream'_
 * `config` {Object}
   * `normalizePath` {Boolean} (defaults to `true`)
   * `followRedirect` {Boolean} (defaults to `true`)

@@ -732,3 +732,114 @@ Unfollowed redirect:
 
 ######################################################################
 
+--------------------------------------------------------------------
+multipart/form-data:
+----------------------------------
+access-control-allow-origin: *
+access-control-allow-methods: *
+access-control-allow-headers: *
+access-control-max-age: 600
+content-type: text/plain
+cache-control: no-cache
+content-length: 2445
+vary: Accept-Encoding
+date: Fri, 01 Apr 2022 14:57:57 GMT
+connection: close
+
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="hidden1"
+
+Hello, World!
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="select1"
+
+Foo
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="select1"
+
+Bar
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="select1"
+
+Baz
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="radio1"
+
+Foo
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="checkbox1"
+
+Foo
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="checkbox1"
+
+Bar
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="checkbox1"
+
+Baz
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="file1"; filename="package.json"
+Content-Type: application/json
+
+{
+  "name": "@warren-bank/node-request",
+  "version": "2.0.8",
+  "main": "request.js",
+  "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies, content-encoding, multipart/form-data. Returns: Promise.",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "@warren-bank/node-denodeify": "^2.1.0",
+    "tough-cookie": "^3.0.1",
+    "tough-cookie-filestore2": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/node-request"
+  },
+  "keywords": [
+    "http request client",
+    "http client",
+    "http",
+    "https",
+    "client",
+    "redirect",
+    "redirects",
+    "cookie jar",
+    "cookie",
+    "cookies",
+    "promise",
+    "content-encoding",
+    "compression",
+    "compressed",
+    "multipart/form-data",
+    "multipart",
+    "form-data",
+    "form data",
+    "stream",
+    "buffer",
+    "request"
+  ]
+}
+
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="files2"; filename=".gitignore"
+
+node_modules/
+
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="files2"; filename="gitignore.txt"
+Content-Type: text/plain
+
+node_modules/
+
+----------denodeify-bc226x1vm15g2wxdsn70l51
+Content-Disposition: form-data; name="files2"
+content-type: text/plain
+
+node_modules/
+
+----------denodeify-bc226x1vm15g2wxdsn70l51--
+######################################################################
+

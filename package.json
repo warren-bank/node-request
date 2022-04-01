@@ -1,17 +1,40 @@
 {
   "name": "@warren-bank/node-request",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "request.js",
-  "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies. Returns: Promise.",
+  "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies, content-encoding, multipart/form-data. Returns: Promise.",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "dependencies": {
-    "@warren-bank/node-denodeify": "^2.0.5",
+    "@warren-bank/node-denodeify": "^2.1.0",
     "tough-cookie": "^3.0.1",
     "tough-cookie-filestore2": "^1.0.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/warren-bank/node-request"
-  }
+  },
+  "keywords": [
+    "http request client",
+    "http client",
+    "http",
+    "https",
+    "client",
+    "redirect",
+    "redirects",
+    "cookie jar",
+    "cookie",
+    "cookies",
+    "promise",
+    "content-encoding",
+    "compression",
+    "compressed",
+    "multipart/form-data",
+    "multipart",
+    "form-data",
+    "form data",
+    "stream",
+    "buffer",
+    "request"
+  ]
 }
