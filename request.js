@@ -158,7 +158,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
           }
           else {
             const txt_data = new String(data.toString('utf8'))
-            txt_data.headers = data.headers
+            txt_data.statusCode = data.statusCode
+            txt_data.headers    = data.headers
 
             data = txt_data
           }

@@ -83,13 +83,13 @@ __request(options[, POST_data, config])__
   * `maxRedirects` {number} (defaults to `10`)
   * `binary` {Boolean} (defaults to `false`)
     * `false`:
-      * data is returned in {string} (utf8 encoding)
+      * data is returned in {String} (utf8 encoding)
     * `true`:
       * data is returned in {Buffer}
   * `stream` {Boolean} (defaults to `false`)
     * `false`:
       * `response` attribute of resolved Promise is a value that contains the entire data file (stored in memory)
-      * data type of `response` is either {Buffer} or {string}, as determined by `binary` option
+      * data type of `response` is either {Buffer} or {String}, as determined by `binary` option
     * `true`:
       * `response` attribute of resolved Promise is a Readable stream
   * `validate_status_code` {Function} | {false}
@@ -127,8 +127,11 @@ __request(options[, POST_data, config])__
       * the ordering is chronological;<br>
         the first element was the first redirect (from `url`)
     * `response` is the data payload
-      * `config.binary` determines the data's encoding (ie: {Buffer} or utf8 {string})
+      * `config.binary` determines the data's encoding (ie: {Buffer} or utf8 {String})
       * `config.stream` determines whether the value is a Readable stream or a memory buffer,<br> either of which is formatted in the chosen encoding
+      * the `response` Object always includes the following attributes:
+        * `statusCode` {integer}
+        * `headers` {Object}
 
 #### Example:
 
