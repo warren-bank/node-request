@@ -1,7 +1,7 @@
 const {denodeify, denodeify_net_request} = require('@warren-bank/node-denodeify')
 const {getCookieJar, getCookieRequestHeader, setCookieResponseHeader} = require('./lib/cookie_jar')
 const {getRequestHeaderAcceptEncoding, processResponseContentEncoding} = require('./lib/zlib_utils')
-const {normalizeRequestOptions, normalizePath} = require('./lib/url_utils')
+const {normalizeRequestOptions, normalizePath, resolveRedirectLocation} = require('./lib/url_utils')
 
 const http = {
   request: denodeify_net_request( require('http').request )
@@ -185,8 +185,10 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
             reject(_error)
           }
           else {
-            redirects.push(error.location)
-            send_net_request(error.location)
+            const redirect = resolveRedirectLocation(error.location, original_url, redirects)
+
+            redirects.push(redirect)
+            send_net_request(redirect)
           }
         }
         else {
