@@ -13,7 +13,15 @@ const log = function(msg, {div=' ', pre='', post=''}={}){
 }
 
 const process_success = function({url, redirects, response}){
-  log((
+  try {
+    const data   = JSON.parse(response.toString())
+    const method = data.method
+    if (!method) throw ''
+
+    log(`request method: ${method}`, {post:"\n"})
+  }
+  catch(e) {
+    log((
 `${sep}${sep}
 URL of initial request:
   ${url}
@@ -24,7 +32,8 @@ Chain of URL redirects:
 Data in response for last URL:
 ${sep}
 ${response}`
-  ), {post:"\n"})
+    ), {post:"\n"})
+  }
 }
 
 const process_error = function(error){
@@ -47,10 +56,28 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-// 1. download a Chuck Norris joke to a Readable stream
-// 2. pipe this Readable stream to the POST data of a 2nd request
-// 3. content of response echoes all data sent in 2nd request, which should contain a Chuck Norris joke
-request.get('https://api.chucknorris.io/jokes/random', '', {binary: true, stream: true})
-.then(data => request.post(['https://httpbin.org/post', {headers: {'content-type': 'application/json'}}], data.response))
+// verbs over HTTPS
+request.get('https://httpbin.org/anything')
+.then(process_success)
+.catch(process_error)
+
+request.post('https://httpbin.org/anything')
+.then(process_success)
+.catch(process_error)
+
+request.put('https://httpbin.org/anything')
+.then(process_success)
+.catch(process_error)
+
+// verbs over HTTP
+request.patch('http://httpbin.org/anything')
+.then(process_success)
+.catch(process_error)
+
+request.delete('http://httpbin.org/anything')
+.then(process_success)
+.catch(process_error)
+
+request.del('http://httpbin.org/anything')
 .then(process_success)
 .catch(process_error)

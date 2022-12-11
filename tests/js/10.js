@@ -1,10 +1,7 @@
 #!/usr/bin/env node
 
-const fs   = require('fs')
-const path = require('path')
-const url  = require('url')
-
 const {request} = require('../../request')
+const {normalizeRequestOptions} = require('../../lib/url_utils')
 
 const sep = Array(35).join('-')
 
@@ -16,22 +13,54 @@ const log = function(msg, {div=' ', pre='', post=''}={}){
   process.stdout.write(msg)
 }
 
-const process_success = function({url, redirects, response}){
-  const headers = []
+// -----------------------------------------------------------------------------
+// test request option normalization
 
-  for (const key in response.headers) {
-    headers.push(`${key}: ${response.headers[key]}`)
-  }
-
+const process_request_options = function(original_req_options, normalized_req_options){
   log((
 `${sep}${sep}
-multipart/form-data:
+Original request options:
 ${sep}
-${headers.join("\n")}
+${JSON.stringify(original_req_options, null, 2)}
 
-${response}`
+Normalized request options:
+${sep}
+${JSON.stringify(normalized_req_options, null, 2)}
+`
   ), {post:"\n"})
 }
+
+const test_request_options = function(original_req_options){
+  const normalized_req_options = normalizeRequestOptions(original_req_options)
+  process_request_options(original_req_options, normalized_req_options)
+}
+
+test_request_options()
+test_request_options(null)
+test_request_options('about:blank')
+test_request_options('https://foo.com/bar/baz.html')
+
+test_request_options([
+  'about:blank'
+])
+test_request_options([
+  'https://foo.com/bar/baz.html'
+])
+test_request_options([
+  'https://foo.com:8080/bar/baz.html?hello=world'
+])
+test_request_options([
+  'https://foo.com:8080/bar/baz.html?hello=world',
+  {port: '9090', pathname: '/rab/zab.php', query: 'goodbye=world'}
+])
+test_request_options([
+  'https://foo.com:8080/bar/baz.html?hello=world',
+  {port: null, pathname: '/rab/zab.php', query: 'goodbye=world'},
+  {headers: {'Content-Type': 'application/json'}}
+])
+
+// -----------------------------------------------------------------------------
+// test bad URLs
 
 const process_error = function(error){
   log((
@@ -53,73 +82,29 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-// using:
-//   https://github.com/warren-bank/node-serve/blob/130002.18.2/.etc/test/www/cgi-bin/echo-post-data/echo-post-data.pl
+const test_bad_url_input = function(){
+  request(null)
+  .catch(process_error)
 
-request.post(
-  'http://localhost/cgi-bin/echo-post-data/echo-post-data.pl',
-  [
-    // multipart form data
-    {
-      name:  "hidden1",
-      value: "Hello, World!"
-    },
-    {
-      name:  "select1",
-      value: "Foo"
-    },
-    {
-      name:  "select1",
-      value: "Bar"
-    },
-    {
-      name:  "select1",
-      value: "Baz"
-    },
-    {
-      name:  "radio1",
-      value: "Foo"
-    },
-    {
-      name:  "checkbox1",
-      value: "Foo"
-    },
-    {
-      name:  "checkbox1",
-      value: "Bar"
-    },
-    {
-      name:  "checkbox1",
-      value: "Baz"
-    },
-    {
-      name:  "file1",
-      value: {
-        filename: path.resolve(__dirname, '../..', 'package.json')
-      }
-    },
-    {
-      name:  "files2",
-      value: {
-        filename: path.resolve(__dirname, '../..', '.gitignore')
-      }
-    },
-    {
-      name:  "files2",
-      value: {
-        file: fs.createReadStream( path.resolve(__dirname, '../..', '.gitignore') ),
-        filename: 'gitignore.txt'
-      }
-    },
-    {
-      name:  "files2",
-      value: {
-        file: fs.createReadStream( path.resolve(__dirname, '../..', '.gitignore') ),
-        mime: 'text/plain'
-      }
-    }
-  ],
-  {binary: false, stream: false}
-)
-.then(process_success)
-.catch(process_error)
+  request('about:blank')
+  .catch(process_error)
+}
+
+const test_bad_url_redirect = function(){
+  let url
+
+  // http://httpbin.org/#/Redirects/get_redirect_to
+  // https://github.com/postmanlabs/httpbin/issues/617
+  url = 'http://httpbin.org/redirect-to?url=about%3Ablank&status_code=301'
+
+  // https://github.com/postmanlabs/httpbin/issues/617#issuecomment-747089912
+  // mirrors:
+  //   url = 'http://nghttp2.org/httpbin' + '/redirect-to?url=about%3Ablank&status_code=301'
+  //   url = 'http://httpbingo.org'       + '/redirect-to?url=about%3Ablank&status_code=301'
+
+  request(url)
+  .catch(process_error)
+}
+
+test_bad_url_input()
+test_bad_url_redirect()

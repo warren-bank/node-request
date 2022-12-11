@@ -12,28 +12,28 @@ HTTP response headers of final request:
 ----------------------------------
 {
   "connection": "close",
-  "content-length": "241",
+  "content-length": "251",
   "cache-control": "max-age=300",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "text/plain; charset=utf-8",
-  "etag": "W/\"30caa283b7d82f9283a26d8eeb59702b235140659892385a835c0532d2f26f75\"",
+  "etag": "W/\"d8db79c558beb05881dc22f9edb95ba19f87a95995f3507e5d4af0cefacdb3c5\"",
   "strict-transport-security": "max-age=31536000",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "x-github-request-id": "CF84:1077:257F57:3577BA:6242B664",
+  "x-github-request-id": "C386:5235:20C3A7:32DC86:639593CD",
   "content-encoding": "gzip",
   "accept-ranges": "bytes",
-  "date": "Tue, 29 Mar 2022 07:33:56 GMT",
+  "date": "Sun, 11 Dec 2022 08:51:39 GMT",
   "via": "1.1 varnish",
-  "x-served-by": "cache-bur-kbur8200099-BUR",
-  "x-cache": "MISS",
-  "x-cache-hits": "0",
-  "x-timer": "S1648539236.249777,VS0,VE201",
+  "x-served-by": "cache-lax10665-LGB",
+  "x-cache": "HIT",
+  "x-cache-hits": "1",
+  "x-timer": "S1670748699.454225,VS0,VE153",
   "vary": "Authorization,Accept-Encoding,Origin",
   "access-control-allow-origin": "*",
-  "x-fastly-request-id": "c68d3a3382aa214d48e0e5619920e6543fd435ff",
-  "expires": "Tue, 29 Mar 2022 07:38:56 GMT",
+  "x-fastly-request-id": "b8958803609a6788756201973e24734f6fe225b4",
+  "expires": "Sun, 11 Dec 2022 08:56:39 GMT",
   "source-age": "0"
 }
 
@@ -41,12 +41,13 @@ Data response for URL of final request:
 ----------------------------------
 {
   "name": "@warren-bank/node-denodeify",
-  "version": "2.0.5",
+  "version": "2.1.2",
   "main": "denodeify.js",
   "description": "wrap Function with Proxy, proxied call returns Promise",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "dependencies": {
+    "mime-types": "2.1.34"
   },
   "repository": {
     "type": "git",
@@ -84,15 +85,15 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"da1f16b08aa0b4da4fbd2bd67b3a637cc534646fde1e9cb590397e3d2b3c57c8\"",
+  "etag": "W/\"cad82b2372e87613364cacb36cf58f8734cbc313fbffe870a0af9db55e118421\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Tue, 29 Mar 2022 07:33:57 GMT",
+  "date": "Sun, 11 Dec 2022 08:51:40 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "E63F:2788:22C5FC:3F9FE1:6242B665",
+  "x-github-request-id": "CDBD:0ACA:29940E:491EBF:63959A1C",
   "connection": "close"
 }
 
@@ -113,15 +114,15 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"da1f16b08aa0b4da4fbd2bd67b3a637cc534646fde1e9cb590397e3d2b3c57c8\"",
+  "etag": "W/\"cad82b2372e87613364cacb36cf58f8734cbc313fbffe870a0af9db55e118421\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Tue, 29 Mar 2022 07:33:58 GMT",
+  "date": "Sun, 11 Dec 2022 08:51:41 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "E641:6A48:1CE4D6:3F615B:6242B666",
+  "x-github-request-id": "CDC0:2B59:3E6921:67E72C:63959A1D",
   "connection": "close"
 }
 
@@ -133,13 +134,19 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-0b01e751625f09cd2f7a8457aae58cfb773c69c7
+d43376b27ab8ceaeb40875035b3f20c7cdcccae2
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
     testing: node-denodeify-master/LICENSE.txt   OK
     testing: node-denodeify-master/README.md   OK
     testing: node-denodeify-master/denodeify.js   OK
+    testing: node-denodeify-master/lib/   OK
+    testing: node-denodeify-master/lib/multipart/   OK
+    testing: node-denodeify-master/lib/multipart/LICENSE.txt   OK
+    testing: node-denodeify-master/lib/multipart/README.md   OK
+    testing: node-denodeify-master/lib/multipart/index.js   OK
+    testing: node-denodeify-master/package-lock.json   OK
     testing: node-denodeify-master/package.json   OK
     testing: node-denodeify-master/tests/   OK
     testing: node-denodeify-master/tests/js/   OK
@@ -151,6 +158,7 @@ Archive:  denodeify.Buffer.zip
     testing: node-denodeify-master/tests/js/06.js   OK
     testing: node-denodeify-master/tests/js/07.js   OK
     testing: node-denodeify-master/tests/js/08.js   OK
+    testing: node-denodeify-master/tests/js/09.js   OK
     testing: node-denodeify-master/tests/run.log   OK
     testing: node-denodeify-master/tests/run.sh   OK
 No errors detected in compressed data of denodeify.Buffer.zip.
@@ -160,13 +168,19 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-0b01e751625f09cd2f7a8457aae58cfb773c69c7
+d43376b27ab8ceaeb40875035b3f20c7cdcccae2
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
     testing: node-denodeify-master/LICENSE.txt   OK
     testing: node-denodeify-master/README.md   OK
     testing: node-denodeify-master/denodeify.js   OK
+    testing: node-denodeify-master/lib/   OK
+    testing: node-denodeify-master/lib/multipart/   OK
+    testing: node-denodeify-master/lib/multipart/LICENSE.txt   OK
+    testing: node-denodeify-master/lib/multipart/README.md   OK
+    testing: node-denodeify-master/lib/multipart/index.js   OK
+    testing: node-denodeify-master/package-lock.json   OK
     testing: node-denodeify-master/package.json   OK
     testing: node-denodeify-master/tests/   OK
     testing: node-denodeify-master/tests/js/   OK
@@ -178,6 +192,7 @@ Archive:  denodeify.Stream.zip
     testing: node-denodeify-master/tests/js/06.js   OK
     testing: node-denodeify-master/tests/js/07.js   OK
     testing: node-denodeify-master/tests/js/08.js   OK
+    testing: node-denodeify-master/tests/js/09.js   OK
     testing: node-denodeify-master/tests/run.log   OK
     testing: node-denodeify-master/tests/run.sh   OK
 No errors detected in compressed data of denodeify.Stream.zip.
@@ -191,7 +206,7 @@ URL of request:
 HTTP response headers of request:
 ----------------------------------
 {
-  "date": "Tue, 29 Mar 2022 07:33:59 GMT",
+  "date": "Sun, 11 Dec 2022 08:51:43 GMT",
   "content-type": "text/html; charset=utf-8",
   "content-length": "223",
   "connection": "close",
@@ -220,7 +235,7 @@ Data response for URL of request:
 Content of cookie jar in default JSON format:
   > cat cookies.json
 ---------------------------------------
-{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-03-29T07:33:55.170Z","lastAccessed":"2022-03-29T07:33:55.170Z"}}}}
+{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-12-11T08:51:41.465Z","lastAccessed":"2022-12-11T08:51:41.465Z"}}}}
 
 --------------------------------------------------------------------
 Content of cookie jar after conversion to Netscape format:
@@ -246,9 +261,23 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         "domain": "httpbin.org",
         "path": "/",
         "hostOnly": true,
-        "creation": "2022-03-29T07:33:55.183Z"
+        "creation": "2022-12-11T08:51:41.481Z"
       }
     }
+  }
+}
+
+######################################################################
+
+--------------------------------------------------------------------
+URL of request:
+  https://httpbin.org/cookies
+
+Data response for URL of request:
+----------------------------------
+{
+  "cookies": {
+    "foo": "bar"
   }
 }
 
@@ -475,15 +504,15 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         }
     }
 }
+
 ######################################################################
 
 request method: DELETE
-request method: DELETE
 request method: PATCH
-request method: GET
 request method: POST
 request method: PUT
-
+request method: GET
+request method: DELETE
 ######################################################################
 
 --------------------------------------------------------------------
@@ -497,7 +526,7 @@ Data in response for last URL:
 ----------------------------------
 {
   "args": {}, 
-  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:28.984661\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"U42BlItTRSiD6EPoTlIBXA\",\"updated_at\":\"2020-01-05 13:42:28.984661\",\"url\":\"https://api.chucknorris.io/jokes/U42BlItTRSiD6EPoTlIBXA\",\"value\":\"Chuck Norris isn't a cannibal, because he is actually a superior species. So next time he devours a family member, don't be upset, just remember this is just the beautiful cycle of nature.\"}", 
+  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:27.496799\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"0vF0aJXwTOKoCUJQpa8Wkg\",\"updated_at\":\"2020-01-05 13:42:27.496799\",\"url\":\"https://api.chucknorris.io/jokes/0vF0aJXwTOKoCUJQpa8Wkg\",\"value\":\"Chuck Norris has a heart as black and cold as the most lifeless corners of outer space.\"}", 
   "files": {}, 
   "form": {}, 
   "headers": {
@@ -505,17 +534,18 @@ Data in response for last URL:
     "Content-Type": "application/json", 
     "Host": "httpbin.org", 
     "Transfer-Encoding": "chunked", 
-    "X-Amzn-Trace-Id": "Root=1-62425bc8-169fd72d050a8e16322e166e"
+    "X-Amzn-Trace-Id": "Root=1-63959a2d-39a123bc4fe999d17165518c"
   }, 
   "json": {
     "categories": [], 
-    "created_at": "2020-01-05 13:42:28.984661", 
+    "created_at": "2020-01-05 13:42:27.496799", 
     "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png", 
-    "id": "U42BlItTRSiD6EPoTlIBXA", 
-    "updated_at": "2020-01-05 13:42:28.984661", 
-    "url": "https://api.chucknorris.io/jokes/U42BlItTRSiD6EPoTlIBXA", 
-    "value": "Chuck Norris isn't a cannibal, because he is actually a superior species. So next time he devours a family member, don't be upset, just remember this is just the beautiful cycle of nature."
+    "id": "0vF0aJXwTOKoCUJQpa8Wkg", 
+    "updated_at": "2020-01-05 13:42:27.496799", 
+    "url": "https://api.chucknorris.io/jokes/0vF0aJXwTOKoCUJQpa8Wkg", 
+    "value": "Chuck Norris has a heart as black and cold as the most lifeless corners of outer space."
   }, 
+  "origin": "75.223.9.216", 
   "url": "https://httpbin.org/post"
 }
 
@@ -722,7 +752,7 @@ HTTP status code:
   400
 
 URL of initial request:
-  http://httpbingo.org/redirect-to?url=about%3Ablank&status_code=301
+  http://httpbin.org/redirect-to?url=about%3Ablank&status_code=301
 
 Chain of URL redirects:
   []
@@ -741,56 +771,56 @@ access-control-allow-headers: *
 access-control-max-age: 600
 content-type: text/plain
 cache-control: no-cache
-content-length: 2445
+content-length: 2433
 vary: Accept-Encoding
-date: Fri, 01 Apr 2022 14:57:57 GMT
+date: Sun, 11 Dec 2022 08:51:57 GMT
 connection: close
 
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="hidden1"
 
 Hello, World!
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="select1"
 
 Foo
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="select1"
 
 Bar
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="select1"
 
 Baz
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="radio1"
 
 Foo
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="checkbox1"
 
 Foo
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="checkbox1"
 
 Bar
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="checkbox1"
 
 Baz
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="file1"; filename="package.json"
 Content-Type: application/json
 
 {
   "name": "@warren-bank/node-request",
-  "version": "2.0.8",
+  "version": "2.0.11",
   "main": "request.js",
   "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies, content-encoding, multipart/form-data. Returns: Promise.",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "dependencies": {
-    "@warren-bank/node-denodeify": "^2.1.0",
+    "@warren-bank/node-denodeify": "^2.1.2",
     "tough-cookie": "^3.0.1",
     "tough-cookie-filestore2": "^1.0.0"
   },
@@ -823,23 +853,23 @@ Content-Type: application/json
   ]
 }
 
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="files2"; filename=".gitignore"
 
 node_modules/
 
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="files2"; filename="gitignore.txt"
 Content-Type: text/plain
 
 node_modules/
 
-----------denodeify-bc226x1vm15g2wxdsn70l51
+----------denodeify-ss821o3olwmo1kn5mm3je1
 Content-Disposition: form-data; name="files2"
 content-type: text/plain
 
 node_modules/
 
-----------denodeify-bc226x1vm15g2wxdsn70l51--
+----------denodeify-ss821o3olwmo1kn5mm3je1--
 ######################################################################
 

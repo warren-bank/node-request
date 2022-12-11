@@ -6,36 +6,43 @@ const sep = Array(35).join('-')
 
 const log = function(msg, {div=' ', pre='', post=''}={}){
   if (Array.isArray(msg)) msg = msg.join(div)
-
   msg = pre + (msg ? msg : '') + post
-
   process.stdout.write(msg)
 }
 
-const process_success = function({url, redirects, response}){
-  try {
-    const data   = JSON.parse(response.toString())
-    const method = data.method
-    if (!method) throw ''
+/**
+ * helper:
+ *  - format a message with information about a successful network request
+ *  - include the downloaded text data
+ **/
+const process_success = function(context, json){
+  var all_data, select_data
+  all_data = JSON.parse(json)
+  select_data = {}
 
-    log(`request method: ${method}`, {post:"\n"})
+  for (const key of ['gzipped', 'deflated', 'brotli']) {
+    if (all_data[key] !== undefined) {
+      select_data[key] = all_data[key]
+    }
   }
-  catch(e) {
-    log((
-`${sep}${sep}
-URL of initial request:
-  ${url}
 
-Chain of URL redirects:
-  ${(redirects && redirects.length) ? redirects.join("\n  ") : '[]'}
+  if (all_data.headers) {
+    select_data.headers = {}
 
-Data in response for last URL:
-${sep}
-${response}`
-    ), {post:"\n"})
+    for (const key of ['Host', 'Accept-Encoding']) {
+      if (all_data.headers[key] !== undefined) {
+        select_data.headers[key] = all_data.headers[key]
+      }
+    }
   }
+
+  log(JSON.stringify({context, response: select_data}, null, 4), {post:"\n"})
 }
 
+/**
+ * helper:
+ *  - format an error message
+ **/
 const process_error = function(error){
   log((
 `${sep}${sep}
@@ -56,28 +63,46 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-// verbs over HTTPS
-request.get('https://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+const streamToString = function(stream) {
+  const chunks = [];
+  return new Promise((resolve, reject) => {
+    stream.on('data',  (chunk) => chunks.push(Buffer.from(chunk)))
+    stream.on('error', (err) => reject(err))
+    stream.on('end',   () => resolve(Buffer.concat(chunks).toString('utf8')))
+  })
+}
 
-request.post('https://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+const run_test = async function(){
+  const encodings     = ['gzip', 'deflate', 'brotli']
+  const stream_states = [false, true]
+  const binary_states = [false, true]
 
-request.put('https://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+  for (const encoding of encodings) {
+    for (const stream of stream_states) {
+      for (const binary of binary_states) {
+        log(`${sep}${sep}`, {post:"\n"})
 
-// verbs over HTTP
-request.patch('http://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+        const url        = `https://httpbin.org/${encoding}`
+        const print_json = process_success.bind(null, {url, encoding, stream, binary})
 
-request.delete('http://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+        if (!stream && !binary) {
+          await request(url, null, {stream, binary})
+          .then(data => '' + data.response).then(print_json)
+          .catch(process_error)
+        }
+        if (!stream && binary) {
+          await request(url, null, {stream, binary})
+          .then(data => data.response).then(buf => buf.toString('utf8')).then(print_json)
+          .catch(process_error)
+        }
+        if (stream) {
+          await request(url, null, {stream, binary})
+          .then(data => data.response).then(streamToString).then(print_json)
+          .catch(process_error)
+        }
+      }
+    }
+  }
+}
 
-request.del('http://httpbin.org/anything')
-.then(process_success)
-.catch(process_error)
+run_test()

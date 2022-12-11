@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-const {request}   = require('../../request')
-const parse_url   = require('url').parse
-const querystring = require('querystring')
+const {request} = require('../../request')
+const {getCookieJar_MemoryCookieStore} = require('../../lib/cookie_jar')
 
 const sep = Array(35).join('-')
 
@@ -17,19 +16,22 @@ const log = function(msg, {div=' ', pre='', post=''}={}){
  *  - format a message with information about a successful network request
  *  - include the downloaded text data
  **/
-const process_text_request_metadata_success = function({url, redirects, response}){
-  var all_data, select_data
-  all_data = JSON.parse(response)
-  select_data = {
-    "url": all_data.url,
-    "method": all_data.method,
-    "querystring": all_data.args,
-    "data": all_data.data || querystring.stringify(all_data.form),
-    "headers": {
-      "Content-Length": all_data.headers['Content-Length']
-    }
-  }
-  log([`${sep}${sep}`, JSON.stringify(select_data)], {div:"\n", post:"\n\n"})
+const process_text_success = function(what, {url, redirects, response}){
+  const headers = what.headers ?
+`\n\nHTTP response headers of request:
+${sep}
+${JSON.stringify(response.headers, null, 2)}` : ''
+
+  const body = what.body ?
+`\n\nData response for URL of request:
+${sep}
+${response.trim()}` : ''
+
+  log((
+`${sep}${sep}
+URL of request:
+  ${url}${headers}${body}`
+  ), {post:"\n\n"})
 }
 
 /**
@@ -57,51 +59,15 @@ Unfollowed redirect:
 }
 
 const run_test = async function(){
-  const req_options = parse_url('https://httpbin.org/anything')
+  const cookieJar = getCookieJar_MemoryCookieStore()
 
-  // example: perform a GET and write data to the querystring
-  await request(Object.assign({}, req_options, {method: 'GET', path: `${req_options.path}?my-method=GET&my-data=querystring`}))
-  .then(process_text_request_metadata_success)
+  // example: perform a request that adds a cookie "foo=bar"
+  await request('https://httpbin.org/cookies/set/foo/bar', '', {cookieJar})
   .catch(process_error)
 
-  // example: perform a GET and write data to the outbound Request stream
-  await request(Object.assign({}, req_options, {method: 'GET', path: '/get'}), 'my-method=GET&my-data=stream')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a POST and write data to the outbound Request stream
-  await request(Object.assign({}, req_options, {method: 'POST', path: '/post'}), 'my-method=POST&my-data=stream')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a PUT and write data to the outbound Request stream
-  await request(Object.assign({}, req_options, {method: 'PUT', path: '/put'}), 'my-method=PUT&my-data=stream')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a PATCH and write data to the outbound Request stream
-  await request(Object.assign({}, req_options, {method: 'PATCH', path: '/patch'}), 'my-method=PATCH&my-data=stream')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a DELETE and write data to the outbound Request stream
-  await request(Object.assign({}, req_options, {method: 'DELETE', path: '/delete'}), 'my-method=DELETE&my-data=stream')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a GET and accept encoding: gzip
-  await request(Object.assign({}, req_options, {method: 'GET', path: '/gzip'}), 'my-method=GET&my-encoding=gzip')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a GET and accept encoding: deflate
-  await request(Object.assign({}, req_options, {method: 'GET', path: '/deflate'}), 'my-method=GET&my-encoding=deflate')
-  .then(process_text_request_metadata_success)
-  .catch(process_error)
-
-  // example: perform a GET and accept encoding: brotli (br)
-  await request(Object.assign({}, req_options, {method: 'GET', path: '/brotli'}), 'my-method=GET&my-encoding=brotli')
-  .then(process_text_request_metadata_success)
+  // example: perform a request that retrieves cookies
+  await request('https://httpbin.org/cookies', '', {cookieJar})
+  .then(process_text_success.bind(this, {body: true}))
   .catch(process_error)
 }
 

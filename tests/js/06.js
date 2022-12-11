@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-const {request} = require('../../request')
+const {request}   = require('../../request')
+const parse_url   = require('url').parse
+const querystring = require('querystring')
 
 const sep = Array(35).join('-')
 
@@ -15,28 +17,19 @@ const log = function(msg, {div=' ', pre='', post=''}={}){
  *  - format a message with information about a successful network request
  *  - include the downloaded text data
  **/
-const process_success = function(context, json){
+const process_text_request_metadata_success = function({url, redirects, response}){
   var all_data, select_data
-  all_data = JSON.parse(json)
-  select_data = {}
-
-  for (const key of ['gzipped', 'deflated', 'brotli']) {
-    if (all_data[key] !== undefined) {
-      select_data[key] = all_data[key]
+  all_data = JSON.parse(response)
+  select_data = {
+    "url": all_data.url,
+    "method": all_data.method,
+    "querystring": all_data.args,
+    "data": all_data.data || querystring.stringify(all_data.form),
+    "headers": {
+      "Content-Length": all_data.headers['Content-Length']
     }
   }
-
-  if (all_data.headers) {
-    select_data.headers = {}
-
-    for (const key of ['Host', 'Accept-Encoding']) {
-      if (all_data.headers[key] !== undefined) {
-        select_data.headers[key] = all_data.headers[key]
-      }
-    }
-  }
-
-  log(JSON.stringify({context, response: select_data}, null, 4), {post:"\n"})
+  log([`${sep}${sep}`, JSON.stringify(select_data)], {div:"\n", post:"\n\n"})
 }
 
 /**
@@ -63,46 +56,53 @@ Unfollowed redirect:
   ), {post:"\n\n"})
 }
 
-const streamToString = function(stream) {
-  const chunks = [];
-  return new Promise((resolve, reject) => {
-    stream.on('data',  (chunk) => chunks.push(Buffer.from(chunk)))
-    stream.on('error', (err) => reject(err))
-    stream.on('end',   () => resolve(Buffer.concat(chunks).toString('utf8')))
-  })
-}
-
 const run_test = async function(){
-  const encodings     = ['gzip', 'deflate', 'brotli']
-  const stream_states = [false, true]
-  const binary_states = [false, true]
+  const req_options = parse_url('https://httpbin.org/anything')
 
-  for (const encoding of encodings) {
-    for (const stream of stream_states) {
-      for (const binary of binary_states) {
-        log(`${sep}${sep}`, {post:"\n"})
+  // example: perform a GET and write data to the querystring
+  await request(Object.assign({}, req_options, {method: 'GET', path: `${req_options.path}?my-method=GET&my-data=querystring`}))
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
 
-        const url        = `https://httpbin.org/${encoding}`
-        const print_json = process_success.bind(null, {url, encoding, stream, binary})
+  // example: perform a GET and write data to the outbound Request stream
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/get'}), 'my-method=GET&my-data=stream')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
 
-        if (!stream && !binary) {
-          await request(url, null, {stream, binary})
-          .then(data => '' + data.response).then(print_json)
-          .catch(process_error)
-        }
-        if (!stream && binary) {
-          await request(url, null, {stream, binary})
-          .then(data => data.response).then(buf => buf.toString('utf8')).then(print_json)
-          .catch(process_error)
-        }
-        if (stream) {
-          await request(url, null, {stream, binary})
-          .then(data => data.response).then(streamToString).then(print_json)
-          .catch(process_error)
-        }
-      }
-    }
-  }
+  // example: perform a POST and write data to the outbound Request stream
+  await request(Object.assign({}, req_options, {method: 'POST', path: '/post'}), 'my-method=POST&my-data=stream')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a PUT and write data to the outbound Request stream
+  await request(Object.assign({}, req_options, {method: 'PUT', path: '/put'}), 'my-method=PUT&my-data=stream')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a PATCH and write data to the outbound Request stream
+  await request(Object.assign({}, req_options, {method: 'PATCH', path: '/patch'}), 'my-method=PATCH&my-data=stream')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a DELETE and write data to the outbound Request stream
+  await request(Object.assign({}, req_options, {method: 'DELETE', path: '/delete'}), 'my-method=DELETE&my-data=stream')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a GET and accept encoding: gzip
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/gzip'}), 'my-method=GET&my-encoding=gzip')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a GET and accept encoding: deflate
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/deflate'}), 'my-method=GET&my-encoding=deflate')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
+
+  // example: perform a GET and accept encoding: brotli (br)
+  await request(Object.assign({}, req_options, {method: 'GET', path: '/brotli'}), 'my-method=GET&my-encoding=brotli')
+  .then(process_text_request_metadata_success)
+  .catch(process_error)
 }
 
 run_test()
