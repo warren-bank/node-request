@@ -56,9 +56,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
   config.cookieJar = getCookieJar(config.cookieJar)
 
   return new Promise((resolve, reject) => {
-    const redirects   = []
-    const set_cookies = []
-    let _is_https, _req_options, _protocol, _error
+    const redirects = []
+    let _is_https, _req_options, _error
 
     const send_net_request = async function(url){
 
@@ -139,21 +138,10 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
         )
       }
 
-      _protocol = _is_https ? https : http
+      try {
+        const protocol = _is_https ? https : http
 
-      _protocol.request(_req_options, POST_data, cb_options)
-      .then(async (data) => {
-
-        // prepend cookies set by previous redirects
-        if (set_cookies.length) {
-          if (!(data.headers instanceof Object)) {
-            data.headers = {}
-          }
-          if (!Array.isArray(data.headers['set-cookie'])) {
-            data.headers['set-cookie'] = []
-          }
-          data.headers['set-cookie'].unshift(...set_cookies)
-        }
+        let data = await protocol.request(_req_options, POST_data, cb_options)
 
         if (config.cookieJar){
           await setCookieResponseHeader(
@@ -179,18 +167,21 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
         }
 
         resolve({url: original_url, redirects, response: data})
-      })
-      .catch((error) => {
-        if ((error.statusCode) && (error.statusCode >= 300) && (error.statusCode < 400) && (error.location)){
-          if ((error.headers instanceof Object) && Array.isArray(error.headers['set-cookie'])) {
-            set_cookies.push(...error.headers['set-cookie'])
-          }
+      }
+      catch(error) {
+        if (config.cookieJar){
+          await setCookieResponseHeader(
+            config.cookieJar,
+            get_url_from_request_options(_req_options),
+            error.headers
+          )
+        }
 
+        if ((error.statusCode) && (error.statusCode >= 300) && (error.statusCode < 400) && (error.location)){
           if (! config.followRedirect){
             _error = new Error('Not following redirects')
             _error.statusCode  = error.statusCode
             _error.location    = error.location
-            _error.set_cookies = set_cookies
             _error.url         = original_url
             reject(_error)
           }
@@ -199,7 +190,6 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
             _error.statusCode  = error.statusCode
             _error.location    = error.location
             _error.redirects   = redirects
-            _error.set_cookies = set_cookies
             _error.url         = original_url
             reject(_error)
           }
@@ -213,7 +203,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
         else {
           reject(error)
         }
-      })
+      }
 
     }
 
