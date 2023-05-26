@@ -287,16 +287,9 @@ These HTTP method convenience functions act just like `request()` but with a def
 
 #### Requirements:
 
-* Node version: v6.4.0 (and higher)
-  * [ES6 support](http://node.green/)
-    * v0.12.18+: Promise
-    * v4.08.03+: Object shorthand methods
-    * v5.12.00+: spread operator
-    * v6.04.00+: Proxy constructor
-    * v6.04.00+: Proxy 'apply' handler
-    * v6.04.00+: Reflect.apply
-  * tested in:
-    * v7.9.0
+* Node.js version: v8.6.0 (and higher)
+  - transitive [dependency](https://github.com/warren-bank/node-request/blob/master/package.json#L9) requirements:
+    * v8.06.00+: [`@warren-bank/node-denodeify`](https://github.com/warren-bank/node-denodeify#requirements)
 
 #### Legal:
 
