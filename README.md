@@ -109,7 +109,7 @@ __request(options[, POST_data, config])__
     * `string`:
       * file path to the persistent text file used to store cookie data
       * file is created when it does not already exist
-      * constructs an instance of `CookieJar` using the cookie store:<br>["tough-cookie-filestore2"](https://github.com/stanleyxu2005/tough-cookie-filestore2)
+      * constructs an instance of `CookieJar` using the cookie store:<br>["tough-cookie-file-store"](https://github.com/ivanmarban/tough-cookie-file-store)
         * this cookie store uses JSON format
     * `true`:
       * constructs an instance of `CookieJar` using the cookie store:<br>[require('tough-cookie/lib/memstore').MemoryCookieStore](https://github.com/salesforce/tough-cookie/blob/master/lib/memstore.js)

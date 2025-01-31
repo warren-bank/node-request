@@ -11,7 +11,7 @@ Chain of URL redirects:
 HTTP response headers of final request:
 ----------------------------------
 {
-  "connection": "close",
+  "connection": "keep-alive",
   "content-length": "251",
   "cache-control": "max-age=300",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
@@ -21,19 +21,20 @@ HTTP response headers of final request:
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "x-github-request-id": "C386:5235:20C3A7:32DC86:639593CD",
+  "x-github-request-id": "A207:26009A:FD258:113151:679C7085",
   "content-encoding": "gzip",
   "accept-ranges": "bytes",
-  "date": "Sun, 11 Dec 2022 08:51:39 GMT",
+  "date": "Fri, 31 Jan 2025 07:08:35 GMT",
   "via": "1.1 varnish",
-  "x-served-by": "cache-lax10665-LGB",
+  "x-served-by": "cache-hhr-khhr2060036-HHR",
   "x-cache": "HIT",
   "x-cache-hits": "1",
-  "x-timer": "S1670748699.454225,VS0,VE153",
+  "x-timer": "S1738307316.524151,VS0,VE256",
   "vary": "Authorization,Accept-Encoding,Origin",
   "access-control-allow-origin": "*",
-  "x-fastly-request-id": "b8958803609a6788756201973e24734f6fe225b4",
-  "expires": "Sun, 11 Dec 2022 08:56:39 GMT",
+  "cross-origin-resource-policy": "cross-origin",
+  "x-fastly-request-id": "8c5e6ef834904474b5b9bd7a889d8bd518758a05",
+  "expires": "Fri, 31 Jan 2025 07:13:35 GMT",
   "source-age": "0"
 }
 
@@ -85,16 +86,16 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"cad82b2372e87613364cacb36cf58f8734cbc313fbffe870a0af9db55e118421\"",
+  "cross-origin-resource-policy": "cross-origin",
+  "etag": "W/\"611a16e3bad2d96781cf5a9f989e24361341e5f4ac2c9a53f122be7b48a2b3f5\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Sun, 11 Dec 2022 08:51:40 GMT",
+  "date": "Fri, 31 Jan 2025 07:08:36 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "CDBD:0ACA:29940E:491EBF:63959A1C",
-  "connection": "close"
+  "x-github-request-id": "C9C9:1932EA:551B9:6A402:679C76F4"
 }
 
 Binary data Buffer saved to file:
@@ -114,16 +115,16 @@ HTTP response headers of final request:
   "content-disposition": "attachment; filename=node-denodeify-master.zip",
   "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
   "content-type": "application/zip",
-  "etag": "W/\"cad82b2372e87613364cacb36cf58f8734cbc313fbffe870a0af9db55e118421\"",
+  "cross-origin-resource-policy": "cross-origin",
+  "etag": "W/\"611a16e3bad2d96781cf5a9f989e24361341e5f4ac2c9a53f122be7b48a2b3f5\"",
   "strict-transport-security": "max-age=31536000",
   "vary": "Authorization,Accept-Encoding,Origin",
   "x-content-type-options": "nosniff",
   "x-frame-options": "deny",
   "x-xss-protection": "1; mode=block",
-  "date": "Sun, 11 Dec 2022 08:51:41 GMT",
+  "date": "Fri, 31 Jan 2025 07:08:37 GMT",
   "transfer-encoding": "chunked",
-  "x-github-request-id": "CDC0:2B59:3E6921:67E72C:63959A1D",
-  "connection": "close"
+  "x-github-request-id": "C9C9:1932EA:551BE:6A408:679C76F4"
 }
 
 Binary data Stream saved to file:
@@ -134,7 +135,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Buffer.zip
 ---------------------------------------
 Archive:  denodeify.Buffer.zip
-d43376b27ab8ceaeb40875035b3f20c7cdcccae2
+152be1c5cd2339895a3adb9d8e7e9d034b4f5b31
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -168,7 +169,7 @@ Test integrity of binary zip file:
   > unzip -t denodeify.Stream.zip
 ---------------------------------------
 Archive:  denodeify.Stream.zip
-d43376b27ab8ceaeb40875035b3f20c7cdcccae2
+152be1c5cd2339895a3adb9d8e7e9d034b4f5b31
     testing: node-denodeify-master/   OK
     testing: node-denodeify-master/.gitignore   OK
     testing: node-denodeify-master/.npmignore   OK
@@ -206,10 +207,10 @@ URL of request:
 HTTP response headers of request:
 ----------------------------------
 {
-  "date": "Sun, 11 Dec 2022 08:51:43 GMT",
+  "date": "Fri, 31 Jan 2025 07:08:38 GMT",
   "content-type": "text/html; charset=utf-8",
   "content-length": "223",
-  "connection": "close",
+  "connection": "keep-alive",
   "server": "gunicorn/19.9.0",
   "location": "/cookies",
   "set-cookie": [
@@ -235,7 +236,7 @@ Data response for URL of request:
 Content of cookie jar in default JSON format:
   > cat cookies.json
 ---------------------------------------
-{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2022-12-11T08:51:41.465Z","lastAccessed":"2022-12-11T08:51:41.465Z"}}}}
+{"httpbin.org":{"/":{"foo":{"key":"foo","value":"bar","domain":"httpbin.org","path":"/","hostOnly":true,"creation":"2025-01-31T07:08:36.172Z","lastAccessed":"2025-01-31T07:08:36.172Z"}}}}
 
 --------------------------------------------------------------------
 Content of cookie jar after conversion to Netscape format:
@@ -261,7 +262,7 @@ Content of cookie jar after re-conversion from Netscape format to JSON:
         "domain": "httpbin.org",
         "path": "/",
         "hostOnly": true,
-        "creation": "2022-12-11T08:51:41.481Z"
+        "creation": "2025-01-31T07:08:36.181Z"
       }
     }
   }
@@ -509,10 +510,10 @@ Data response for URL of request:
 
 request method: DELETE
 request method: PATCH
-request method: POST
+request method: DELETE
 request method: PUT
 request method: GET
-request method: DELETE
+request method: POST
 ######################################################################
 
 --------------------------------------------------------------------
@@ -526,7 +527,7 @@ Data in response for last URL:
 ----------------------------------
 {
   "args": {}, 
-  "data": "{\"categories\":[],\"created_at\":\"2020-01-05 13:42:27.496799\",\"icon_url\":\"https://assets.chucknorris.host/img/avatar/chuck-norris.png\",\"id\":\"0vF0aJXwTOKoCUJQpa8Wkg\",\"updated_at\":\"2020-01-05 13:42:27.496799\",\"url\":\"https://api.chucknorris.io/jokes/0vF0aJXwTOKoCUJQpa8Wkg\",\"value\":\"Chuck Norris has a heart as black and cold as the most lifeless corners of outer space.\"}", 
+  "data": "{\"categories\":[\"explicit\"],\"created_at\":\"2020-01-05 13:42:19.576875\",\"icon_url\":\"https://api.chucknorris.io/img/avatar/chuck-norris.png\",\"id\":\"_4ckz5ltsh2fyxsdd-2v4q\",\"updated_at\":\"2020-01-05 13:42:19.576875\",\"url\":\"https://api.chucknorris.io/jokes/_4ckz5ltsh2fyxsdd-2v4q\",\"value\":\"Chuck Norris does not wear a condom. Because there is no such thing as protection from Chuck Norris.\"}", 
   "files": {}, 
   "form": {}, 
   "headers": {
@@ -534,16 +535,18 @@ Data in response for last URL:
     "Content-Type": "application/json", 
     "Host": "httpbin.org", 
     "Transfer-Encoding": "chunked", 
-    "X-Amzn-Trace-Id": "Root=1-63959a2d-39a123bc4fe999d17165518c"
+    "X-Amzn-Trace-Id": "Root=1-679c76ff-376a37710eed506734853a8a"
   }, 
   "json": {
-    "categories": [], 
-    "created_at": "2020-01-05 13:42:27.496799", 
-    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png", 
-    "id": "0vF0aJXwTOKoCUJQpa8Wkg", 
-    "updated_at": "2020-01-05 13:42:27.496799", 
-    "url": "https://api.chucknorris.io/jokes/0vF0aJXwTOKoCUJQpa8Wkg", 
-    "value": "Chuck Norris has a heart as black and cold as the most lifeless corners of outer space."
+    "categories": [
+      "explicit"
+    ], 
+    "created_at": "2020-01-05 13:42:19.576875", 
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png", 
+    "id": "_4ckz5ltsh2fyxsdd-2v4q", 
+    "updated_at": "2020-01-05 13:42:19.576875", 
+    "url": "https://api.chucknorris.io/jokes/_4ckz5ltsh2fyxsdd-2v4q", 
+    "value": "Chuck Norris does not wear a condom. Because there is no such thing as protection from Chuck Norris."
   }, 
   "origin": "75.223.9.216", 
   "url": "https://httpbin.org/post"
@@ -771,58 +774,59 @@ access-control-allow-headers: *
 access-control-max-age: 600
 content-type: text/plain
 cache-control: no-cache
-content-length: 2433
+content-length: 2444
 vary: Accept-Encoding
-date: Sun, 11 Dec 2022 08:51:57 GMT
-connection: close
+date: Fri, 31 Jan 2025 07:08:46 GMT
+connection: keep-alive
+keep-alive: timeout=5
 
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="hidden1"
 
 Hello, World!
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="select1"
 
 Foo
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="select1"
 
 Bar
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="select1"
 
 Baz
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="radio1"
 
 Foo
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="checkbox1"
 
 Foo
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="checkbox1"
 
 Bar
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="checkbox1"
 
 Baz
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="file1"; filename="package.json"
 Content-Type: application/json
 
 {
   "name": "@warren-bank/node-request",
-  "version": "2.0.11",
+  "version": "2.0.14",
   "main": "request.js",
   "description": "An extremely lightweight HTTP request client. Supports: http, https, redirects, cookies, content-encoding, multipart/form-data. Returns: Promise.",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
   "dependencies": {
     "@warren-bank/node-denodeify": "^2.1.2",
-    "tough-cookie": "^3.0.1",
-    "tough-cookie-filestore2": "^1.0.0"
+    "tough-cookie": "4.1.4",
+    "tough-cookie-file-store": "2.0.3"
   },
   "repository": {
     "type": "git",
@@ -853,23 +857,23 @@ Content-Type: application/json
   ]
 }
 
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="files2"; filename=".gitignore"
 
 node_modules/
 
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="files2"; filename="gitignore.txt"
 Content-Type: text/plain
 
 node_modules/
 
-----------denodeify-ss821o3olwmo1kn5mm3je1
+----------denodeify-v6p23w5pdzbb6upft8p82j1
 Content-Disposition: form-data; name="files2"
 content-type: text/plain
 
 node_modules/
 
-----------denodeify-ss821o3olwmo1kn5mm3je1--
+----------denodeify-v6p23w5pdzbb6upft8p82j1--
 ######################################################################
 
