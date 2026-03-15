@@ -81,6 +81,10 @@ __request(options[, POST_data, config])__
   * `normalizePath` {Boolean} (defaults to `true`)
   * `followRedirect` {Boolean} (defaults to `true`)
   * `maxRedirects` {number} (defaults to `10`)
+  * `shuffleCiphers` {Boolean} (defaults to `false`)
+    * `true`:
+      * randomizes the order of the list of TLS cipher suites
+      * the effect of which is to randomize the TLS fingerprint of the HTTP request client
   * `binary` {Boolean} (defaults to `false`)
     * `false`:
       * data is returned in {String} (utf8 encoding)

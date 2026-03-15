@@ -48,6 +48,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
       normalizePath: true,
       followRedirect: true,
       maxRedirects: 10,
+      shuffleCiphers: false,
       cookieJar: null
     },
     opts
@@ -136,6 +137,22 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
           get_url_from_request_options(_req_options),
           _req_options['headers']
         )
+      }
+
+      if (config.shuffleCiphers && _is_https){
+        const old_ciphers = (_req_options.ciphers || require('tls').DEFAULT_CIPHERS || '').split(':')
+        const new_ciphers = []
+
+        while (old_ciphers.length){
+          const index = Math.floor(Math.random() * old_ciphers.length)
+          new_ciphers.push(
+            ...old_ciphers.splice(index, 1)
+          )
+        }
+
+        if (new_ciphers.length){
+          _req_options.ciphers = new_ciphers.join(':')
+        }
       }
 
       try {
