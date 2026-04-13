@@ -84,7 +84,13 @@ __request(options[, POST_data, config])__
   * `shuffleCiphers` {Boolean} (defaults to `false`)
     * `true`:
       * randomizes the order of the list of TLS cipher suites
-      * the effect of which is to randomize the TLS fingerprint of the HTTP request client
+      * the effect of which is to randomize the `JA3` TLS fingerprint of the HTTP request client
+  * `randomizeCiphers` {Boolean} (defaults to `false`)
+    * `true`:
+      * randomizes the values in the list of TLS cipher suites by one of the following methods:
+        - enable a group of cipher suites that were previously excluded
+        - add a new cipher suite that is supported, but was not previously included
+      * the effect of which is to randomize the `JA4` TLS fingerprint of the HTTP request client
   * `binary` {Boolean} (defaults to `false`)
     * `false`:
       * data is returned in {String} (utf8 encoding)

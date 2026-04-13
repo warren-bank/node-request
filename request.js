@@ -49,6 +49,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
       followRedirect: true,
       maxRedirects: 10,
       shuffleCiphers: false,
+      randomizeCiphers: false,
       cookieJar: null
     },
     opts
@@ -140,7 +141,7 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
       }
 
       if (config.shuffleCiphers && _is_https){
-        const old_ciphers = (_req_options.ciphers || require('tls').DEFAULT_CIPHERS || '').split(':')
+        const old_ciphers = (_req_options.ciphers || require('tls').DEFAULT_CIPHERS || '').split(':').map(val => val.toUpperCase())
         const new_ciphers = []
 
         while (old_ciphers.length){
@@ -148,6 +149,42 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
           new_ciphers.push(
             ...old_ciphers.splice(index, 1)
           )
+        }
+
+        if (new_ciphers.length){
+          _req_options.ciphers = new_ciphers.join(':')
+        }
+      }
+
+      if (config.randomizeCiphers && _is_https){
+        const old_ciphers = (_req_options.ciphers || require('tls').DEFAULT_CIPHERS || '').split(':').map(val => val.toUpperCase())
+        let new_ciphers   = []
+
+        if (!new_ciphers.length) {
+          const old_ciphers_blacklist_indices = []
+          for (let i=0; i < old_ciphers.length; i++) {
+            const old_cipher = old_ciphers[i]
+            if (old_cipher && (old_cipher[0] === '!')) {
+              old_ciphers_blacklist_indices.push(i)
+            }
+          }
+          if (old_ciphers_blacklist_indices.length) {
+            //remove a cipher group from blacklist
+            const old_index = old_ciphers_blacklist_indices[ Math.floor(Math.random() * old_ciphers_blacklist_indices.length) ]
+            old_ciphers.splice(old_index, 1)
+            new_ciphers = old_ciphers
+          }
+        }
+
+        if (!new_ciphers.length) {
+          const all_ciphers = require('tls').getCiphers().map(val => val.toUpperCase())
+          const alt_ciphers = all_ciphers.filter(val => !old_ciphers.includes(val))
+
+          if (alt_ciphers.length) {
+            // add a cipher to whitelist
+            const new_cipher  = alt_ciphers[ Math.floor(Math.random() * alt_ciphers.length) ]
+            new_ciphers = [...old_ciphers, new_cipher]
+          }
         }
 
         if (new_ciphers.length){
