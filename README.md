@@ -131,6 +131,14 @@ __request(options[, POST_data, config])__
           * cookies are added earlier in the chain of redirects than they are ultimately consumed
     * default:
       * no cookie jar is used
+  * `keepContentEncoding` {Boolean} (defaults to `false`)
+    * `false`:
+      * `response` attribute of resolved Promise is decoded
+      * the `content-encoding` response header is removed
+      * the format of the decoded data is identified by the `content-type` response header
+    * `true`:
+      * `response` attribute of resolved Promise is encoded, as it was received from the server
+      * the method of encoding is identified by the `content-encoding` response header
 * Returns: {Promise}
   * value is resolved to an {Object}: `{url, redirects, response}`
     * `url` is a {string} that represents the original request `options`

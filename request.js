@@ -51,7 +51,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
       shuffleCiphers: false,
       randomizeCiphers: false,
       maxAdditionalCiphers: 5,
-      cookieJar: null
+      cookieJar: null,
+      keepContentEncoding: false
     },
     opts
   )
@@ -219,7 +220,8 @@ const make_net_request = function(req_method, req_options, POST_data='', opts={}
           )
         }
 
-        data = await processResponseContentEncoding(data, cb_options)
+        if (!config.keepContentEncoding)
+          data = await processResponseContentEncoding(data, cb_options)
 
         if (!is_binary){
           if (cb_options.stream){
